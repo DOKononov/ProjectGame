@@ -9,40 +9,53 @@ import UIKit
 
 class GameVC: UIViewController {
     
+
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     let padding: CGFloat = 20
     let cardsInRow: CGFloat = 3
     let heightAspectRatio: CGFloat = 1.3813
-    
+    var cardsArray = [Card]()
+    var game = Game()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        cardsArray = game.generateDeck()
         
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: true)
+        cardsArray[indexPath.row].isFaceUp = !cardsArray[indexPath.row].isFaceUp
+        collectionView.reloadItems(at: [indexPath])
+
     }
+    
+    
     
 }
 
 
 
+
+
+
+//MARK: -extension GameVC
 extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //TODO: array.count
-        return 20
+        return cardsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell
-        cell?.imageView.image = UIImage(named: "cardBack")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell else {print("error GVC cellForItemAt"); return UICollectionViewCell()}
         
-        //TODO: remove forceunwrap
-        return cell!
+        let card = cardsArray[indexPath.row]
+        cell.card = card
+        cell.setupCell()
+        return cell
     }
     
     //aspectRatio 1 : 1.3813
