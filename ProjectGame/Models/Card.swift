@@ -7,8 +7,16 @@
 
 import Foundation
  
-struct Card {
+class Card {
     
-    var isFaceUp = false
-    var name: String?
+    var name: String
+    var isFaceUp: Bool
+    var isMatched: Bool
+    
+    init(name: String, isFaceUp: Bool = false, isMatched: Bool = false) {
+        self.name = name
+        self.isFaceUp = isFaceUp
+        self.isMatched = isMatched
+        
+    }
 }

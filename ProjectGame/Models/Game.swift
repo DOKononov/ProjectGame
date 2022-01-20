@@ -9,7 +9,7 @@ import Foundation
 
 struct Game {
   
-    var deckSize = 22
+    var deckSize = 20
     
     let cardsNames = ["card1",
                       "card2",
@@ -35,8 +35,8 @@ struct Game {
             if let newCardName = cardsNames.randomElement() {
                 if !uniqueName.contains(newCardName) {
                     uniqueName.append(newCardName)
-                    tempDeck.append(Card(isFaceUp: false, name: newCardName))
-                    tempDeck.append(Card(isFaceUp: false, name: newCardName))
+                    tempDeck.append(Card.init(name: newCardName))
+                    tempDeck.append(Card.init(name: newCardName))
                 }
             }
         }

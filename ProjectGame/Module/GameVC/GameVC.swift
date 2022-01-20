@@ -13,11 +13,16 @@ class GameVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let padding: CGFloat = 20
-    let cardsInRow: CGFloat = 3
+    let padding: CGFloat = 10
+    let cardsInRow: CGFloat = 4
     let heightAspectRatio: CGFloat = 1.3813
     var cardsArray = [Card]()
     var game = Game()
+    
+    var firstIndex: IndexPath?
+    var secondIndex: IndexPath?
+    var firsrCard: Card?
+    var secondCard: Card?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +33,45 @@ class GameVC: UIViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        cardsArray[indexPath.row].isFaceUp = !cardsArray[indexPath.row].isFaceUp
-        collectionView.reloadItems(at: [indexPath])
+        let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionViewCell
+        let card = cardsArray[indexPath.row]
+        cell?.card = card
+        
+
+        
+//        if firstIndex == nil {
+//            firstIndex = indexPath
+//            card.isFaceUp = !card.isFaceUp
+//            firsrCard = card
+//            cell?.flipCard()
+//            print("1")
+//        } else if secondIndex == nil {
+//            secondIndex = indexPath
+//            card.isFaceUp = !card.isFaceUp
+//            secondCard = card
+//            cell?.flipCard()
+//            print("2")
+//
+//        }
+//
+        
+        card.isFaceUp = !card.isFaceUp
+        cell?.flipCard()
+        
+        
+//        cardsArray[indexPath.row].isFaceUp = !cardsArray[indexPath.row].isFaceUp
+//        collectionView.reloadItems(at: [indexPath])
 
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell else {return UICollectionViewCell()}
+        
+        let card = cardsArray[indexPath.row]
+        cell.card = card
+        cell.setupCell()
+        return cell
+    }
     
 }
 
@@ -48,16 +86,7 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardsArray.count
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell else {print("error GVC cellForItemAt"); return UICollectionViewCell()}
-        
-        let card = cardsArray[indexPath.row]
-        cell.card = card
-        cell.setupCell()
-        return cell
-    }
-    
+
     //aspectRatio 1 : 1.3813
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
