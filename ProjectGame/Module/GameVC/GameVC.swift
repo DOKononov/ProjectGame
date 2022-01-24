@@ -11,11 +11,13 @@ class GameVC: UIViewController {
     
 
     
+    @IBOutlet weak var zoomImage: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let padding: CGFloat = 10
-    let cardsInRow: CGFloat = 4
+    let padding: CGFloat = 20
+    let cardsInRow: CGFloat = 3
     let heightAspectRatio: CGFloat = 1.3813
+    
     var cardsArray = [Card]()
     var game = Game()
     
@@ -39,24 +41,36 @@ class GameVC: UIViewController {
         
 
         
-//        if firstIndex == nil {
-//            firstIndex = indexPath
-//            card.isFaceUp = !card.isFaceUp
-//            firsrCard = card
-//            cell?.flipCard()
-//            print("1")
-//        } else if secondIndex == nil {
-//            secondIndex = indexPath
-//            card.isFaceUp = !card.isFaceUp
-//            secondCard = card
-//            cell?.flipCard()
-//            print("2")
-//
-//        }
-//
+        if firstIndex == nil {
+            firstIndex = indexPath
+            card.isFaceUp = true
+            firsrCard = card
+            cell?.flipCard()
+            print("1")
+        } else if secondIndex == nil {
+            secondIndex = indexPath
+            card.isFaceUp = true
+            secondCard = card
+            cell?.flipCard()
+            print("2")
+        } else if firstIndex != nil, secondIndex != nil {
+            guard let firstIndex = firstIndex else { return }
+            guard let secondIndex = secondIndex else { return }
+
+            self.firstIndex = nil
+            self.secondIndex = nil
+            
+            cardsArray[firstIndex.row].isFaceUp = false
+            cardsArray[secondIndex.row].isFaceUp = false
+            
+            collectionView.reloadItems(at: [firstIndex])
+            collectionView.reloadItems(at: [secondIndex])
+            
+        }
+
         
-        card.isFaceUp = !card.isFaceUp
-        cell?.flipCard()
+//        card.isFaceUp = !card.isFaceUp
+//        cell?.flipCard()
         
         
 //        cardsArray[indexPath.row].isFaceUp = !cardsArray[indexPath.row].isFaceUp
@@ -72,6 +86,22 @@ class GameVC: UIViewController {
         cell.setupCell()
         return cell
     }
+    
+    
+    
+    
+//    @IBAction func didLongPressed(_ sender: UILongPressGestureRecognizer) {
+//        let point = sender.location(in: collectionView)
+//        guard let indexpath = self.collectionView.indexPathForItem(at: point) else {return}
+//        guard let cell = self.collectionView.cellForItem(at: indexpath) as? CardCollectionViewCell else {return}
+//        UIView.transition(with: zoomImage, duration: 0.5, options: [.transitionCrossDissolve], animations: {
+//            if sender.state == .began {
+//                self.zoomImage.image = cell.imageView.image
+//            } else if sender.state == .ended {
+//                self.zoomImage.image = nil
+//            }
+//        }, completion: nil)
+//    }
     
 }
 
@@ -93,6 +123,7 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         let fullFrameWidth = view.frame.width
         let paddingSpace = (cardsInRow + 1) * padding
         let cardWidth = (fullFrameWidth - paddingSpace) / cardsInRow
+        
         return CGSize(width: cardWidth, height: cardWidth * heightAspectRatio)
     }
     
