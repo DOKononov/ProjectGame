@@ -61,13 +61,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tQc-uZ-LGe" secondAttribute="trailing" id="xXq-xP-ot5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="kcu-gQ-rjh"/>
                     <connections>
                         <outlet property="collectionView" destination="tQc-uZ-LGe" id="vj4-ee-EZT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44.927536231884062" y="83.705357142857139"/>
+            <point key="canvasLocation" x="1865.217391304348" y="83.705357142857139"/>
         </scene>
     </scenes>
     <resources>

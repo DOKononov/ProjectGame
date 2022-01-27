@@ -9,9 +9,6 @@ import UIKit
 
 class GameVC: UIViewController {
     
-
-    
-    @IBOutlet weak var zoomImage: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     let padding: CGFloat = 20
@@ -23,64 +20,89 @@ class GameVC: UIViewController {
     
     var firstIndex: IndexPath?
     var secondIndex: IndexPath?
-    var firsrCard: Card?
+    
+    var firstCard: Card?
     var secondCard: Card?
-
+    
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
         cardsArray = game.generateDeck()
+//        loadDeck()
         
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionViewCell
         let card = cardsArray[indexPath.row]
+        guard !card.isMatched else { return }
+        
         cell?.card = card
-        
-
-        
+                
+        //BLOCK 1
         if firstIndex == nil {
-            firstIndex = indexPath
-            card.isFaceUp = true
-            firsrCard = card
-            cell?.flipCard()
-            print("1")
-        } else if secondIndex == nil {
+            openFirstCard(indexpath: indexPath, card: card, cell: cell)
+            
+//            print("block 1")
+            
+            //BLOCK 2
+        } else if secondIndex == nil, firstIndex != indexPath  {
+                    
+            secondCard = card
             secondIndex = indexPath
             card.isFaceUp = true
-            secondCard = card
             cell?.flipCard()
-            print("2")
-        } else if firstIndex != nil, secondIndex != nil {
+            
+//            print("block 2")
+            
+            
+            //BLOCK 2.2
+            //MARK: -checkForWin()
+            if firstCard?.name == secondCard?.name {
+//                guard let firstIndex = firstIndex else { return }
+//                guard let secondIndex = secondIndex else { return }
+//                
+//                cardsArray[firstIndex.row].isMatched = true
+//                cardsArray[secondIndex.row].isMatched = true
+                
+                firstCard?.isMatched = true
+                secondCard?.isMatched = true
+            }
+            
+            
+//            print("block 2.2")
+            
+            //BLOCK 3
+        } else {
             guard let firstIndex = firstIndex else { return }
             guard let secondIndex = secondIndex else { return }
-
+            
+            let cellOne = collectionView.cellForItem(at: firstIndex) as? CardCollectionViewCell
+            let cellTwo = collectionView.cellForItem(at: secondIndex) as? CardCollectionViewCell
+            
             self.firstIndex = nil
             self.secondIndex = nil
             
             cardsArray[firstIndex.row].isFaceUp = false
             cardsArray[secondIndex.row].isFaceUp = false
             
-            collectionView.reloadItems(at: [firstIndex])
-            collectionView.reloadItems(at: [secondIndex])
+            cellOne?.flipCard()
+            cellTwo?.flipCard()
             
+            //new first card
+            openFirstCard(indexpath: indexPath, card: card, cell: cell)
+            
+//            print("block 3")
         }
-
-        
-//        card.isFaceUp = !card.isFaceUp
-//        cell?.flipCard()
-        
-        
-//        cardsArray[indexPath.row].isFaceUp = !cardsArray[indexPath.row].isFaceUp
-//        collectionView.reloadItems(at: [indexPath])
-
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell else {return UICollectionViewCell()}
-        
+
         let card = cardsArray[indexPath.row]
         cell.card = card
         cell.setupCell()
@@ -88,20 +110,33 @@ class GameVC: UIViewController {
     }
     
     
+    func openFirstCard(indexpath: IndexPath, card: Card, cell: CardCollectionViewCell?) {
+        firstCard = card
+        firstIndex = indexpath
+        card.isFaceUp = true
+        cell?.flipCard()
+    }
     
     
-//    @IBAction func didLongPressed(_ sender: UILongPressGestureRecognizer) {
-//        let point = sender.location(in: collectionView)
-//        guard let indexpath = self.collectionView.indexPathForItem(at: point) else {return}
-//        guard let cell = self.collectionView.cellForItem(at: indexpath) as? CardCollectionViewCell else {return}
-//        UIView.transition(with: zoomImage, duration: 0.5, options: [.transitionCrossDissolve], animations: {
-//            if sender.state == .began {
-//                self.zoomImage.image = cell.imageView.image
-//            } else if sender.state == .ended {
-//                self.zoomImage.image = nil
-//            }
-//        }, completion: nil)
+//    @IBAction func saveDidTapped(_ sender: UIBarButtonItem) {
+//        if let data = try? JSONEncoder().encode(cardsArray) {
+//            UserDefaults.standard.set(data, forKey: "deck")
+//        }
 //    }
+//
+//    func loadDeck() {
+//        if cardsArray.isEmpty {
+//            if let data = UserDefaults.standard.data(forKey: "deck") {
+//                if  let deck = try? JSONDecoder().decode([Card].self, from: data) {
+//                    self.cardsArray = deck
+//                }
+//            }
+//        } else {
+//            game.generateDeck()
+//        }
+//
+//    }
+    
     
 }
 
@@ -116,7 +151,7 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardsArray.count
     }
-
+    
     //aspectRatio 1 : 1.3813
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
