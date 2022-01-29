@@ -11,11 +11,11 @@ import UIKit
 class CardCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
-    var card = Card(name: "errorImage")
+    var card = Card(name: "cardBack")
     
     override var isSelected: Bool {
         didSet {
-            print(isSelected)
+//            print(isSelected)
         }
     }
     
@@ -27,7 +27,7 @@ class CardCollectionViewCell: UICollectionViewCell {
         if card.isFaceUp {
             imageView.image = UIImage(named:  card.name)
         } else if !card.isFaceUp {
-            imageView.image = UIImage(named:  "cardBack")
+            imageView.image = UIImage(named: "cardBack")
         }        
     }
     

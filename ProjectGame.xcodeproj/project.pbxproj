@@ -64,6 +64,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		405F98BF27A58A7400DD7148 /* Extencions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extencions;
+			sourceTree = "<group>";
+		};
 		4066E70D278EF146003793CF = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +90,7 @@
 		4066E718278EF146003793CF /* ProjectGame */ = {
 			isa = PBXGroup;
 			children = (
+				405F98BF27A58A7400DD7148 /* Extencions */,
 				4066E730278EF160003793CF /* App */,
 				4029D74E2793E99F009CF961 /* Models */,
 				4066E731278EF189003793CF /* Modules */,
