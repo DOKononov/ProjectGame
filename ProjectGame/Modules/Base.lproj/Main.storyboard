@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gKG-UG-Qwq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -7,7 +7,78 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="BelweBdBTBold.ttf">
+            <string>BelweBT-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
+        <!--LoginVC-->
+        <scene sceneID="2bT-K2-TCs">
+            <objects>
+                <viewController storyboardIdentifier="LoginVC" id="gKG-UG-Qwq" customClass="LoginVC" customModule="ProjectGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hXe-ws-x9A">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="PRE-6d-ThN">
+                                <rect key="frame" x="16" y="431" width="382" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-sk-Wve">
+                                        <rect key="frame" x="0.0" y="0.0" width="84" height="34"/>
+                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="17"/>
+                                        <color key="textColor" red="0.36470589040000001" green="0.26666668059999998" blue="0.1725490093" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter nickname " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ng6-Ja-fIN">
+                                        <rect key="frame" x="106" y="0.0" width="276" height="34"/>
+                                        <color key="backgroundColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" red="0.56862747670000002" green="0.4588235021" blue="0.39607840779999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xr1-Tu-XuD">
+                                <rect key="frame" x="150" y="481" width="114" height="35"/>
+                                <color key="backgroundColor" red="0.75294119120000003" green="0.69803923369999998" blue="0.55294120309999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.36470589040000001" green="0.26666668059999998" blue="0.1686274707" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Start game" cornerStyle="medium">
+                                    <fontDescription key="titleFontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="17"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="startDidPressed:" destination="gKG-UG-Qwq" eventType="touchUpInside" id="j1n-Ip-3wJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VN6-fd-fsN">
+                                <rect key="frame" x="120" y="342" width="174.5" height="49"/>
+                                <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="40"/>
+                                <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PY9-cf-b9a"/>
+                        <color key="backgroundColor" red="0.90196073060000004" green="0.8392156959" blue="0.6784313917" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="xr1-Tu-XuD" firstAttribute="centerX" secondItem="hXe-ws-x9A" secondAttribute="centerX" id="1jI-hU-kNR"/>
+                            <constraint firstItem="VN6-fd-fsN" firstAttribute="centerX" secondItem="hXe-ws-x9A" secondAttribute="centerX" id="MBn-Pv-PUX"/>
+                            <constraint firstItem="PRE-6d-ThN" firstAttribute="leading" secondItem="PY9-cf-b9a" secondAttribute="leading" constant="16" id="OMV-jR-zrb"/>
+                            <constraint firstItem="PRE-6d-ThN" firstAttribute="top" secondItem="VN6-fd-fsN" secondAttribute="bottom" constant="40" id="Zde-pi-CZf"/>
+                            <constraint firstItem="PY9-cf-b9a" firstAttribute="trailing" secondItem="PRE-6d-ThN" secondAttribute="trailing" constant="16" id="deX-Ur-Phs"/>
+                            <constraint firstItem="xr1-Tu-XuD" firstAttribute="top" secondItem="PRE-6d-ThN" secondAttribute="bottom" constant="16" id="usa-s2-ty6"/>
+                            <constraint firstItem="PRE-6d-ThN" firstAttribute="centerY" secondItem="hXe-ws-x9A" secondAttribute="centerY" id="yp3-Yf-70q"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nicknameTF" destination="Ng6-Ja-fIN" id="qmt-n2-pTw"/>
+                        <outlet property="startButton" destination="xr1-Tu-XuD" id="otL-dc-Kho"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Pr-Tv-MAC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1139" y="84"/>
+        </scene>
         <!--GameVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>

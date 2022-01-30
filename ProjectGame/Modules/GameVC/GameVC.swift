@@ -115,9 +115,9 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     //aspectRatio 1 : 1.3813
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let fullFrameWidth = view.frame.width
+        let frameWidth = min(view.frame.width, view.frame.height)
         let paddingSpace = (cardsInRow + 1) * padding
-        let cardWidth = (fullFrameWidth - paddingSpace) / cardsInRow
+        let cardWidth = (frameWidth - paddingSpace) / cardsInRow
         
         return CGSize(width: cardWidth, height: cardWidth * heightAspectRatio)
     }
