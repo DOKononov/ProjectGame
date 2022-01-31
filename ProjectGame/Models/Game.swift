@@ -9,7 +9,7 @@ import Foundation
 
 struct Game {
   
-    var deckSize = 24
+    var deckSize = 6
     
     let cardsNames = ["card1",
                       "card2",

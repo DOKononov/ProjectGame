@@ -23,22 +23,25 @@ class LoginVC: UIViewController {
 
     @IBAction func startDidPressed(_ sender: UIButton) {
        let nextVC =  GameVC.getVC(from: .main)
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true, completion: nil)
+        navigationController?.pushViewController(nextVC, animated: true)
+        
+//        nextVC.modalPresentationStyle = .fullScreen
+//        present(nextVC, animated: true, completion: nil)
         
     }
     
     
 
     private func setupTF() {
-        let placeholderColor = NSAttributedString(string: placeholderText,
+        
+        let customPlaceholder = NSAttributedString(string: placeholderText,
                                                   attributes:
                                                     [NSAttributedString.Key.foregroundColor:
                                                         UIColor(red: 145 / 255,
-                                                                green: 117 / 255,
-                                                                blue: 101 / 255,
-                                                                alpha: 1)])
-        nicknameTF.attributedPlaceholder = placeholderColor
+                                                                        green: 117 / 255,
+                                                                        blue: 101 / 255,
+                                                                        alpha: 1)])
+        nicknameTF.attributedPlaceholder = customPlaceholder
         nicknameTF.textColor = .white
         
         nicknameTF.layer.cornerRadius = nicknameTF.frame.size.height / 2
@@ -60,6 +63,10 @@ class LoginVC: UIViewController {
         startButton.clipsToBounds = true
         
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     
