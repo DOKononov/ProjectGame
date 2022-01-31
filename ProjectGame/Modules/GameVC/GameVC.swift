@@ -14,29 +14,28 @@ class GameVC: UIViewController {
     let padding: CGFloat = 20
     let cardsInRow: CGFloat = 3
     let heightAspectRatio: CGFloat = 1.3813
+    var setTimer = 60
     
     var cardsArray = [Card]()
     var game = Game()
+    var gameHaveBeenStarted = false
     
     var firstIndex: IndexPath?
     var secondIndex: IndexPath?
-    
     var firstCard: Card?
     var secondCard: Card?
     
     var timerLabel: UILabel?
     var scoreLabel: UILabel?
     
-    var setTimer = 60
-    var timerCounter = 60 {
+    var timer: Timer?
+    var timerCounter = 0 {
         didSet { timerLabel?.text = "Time left: \(timerCounter) sec" }
     }
     var scoreCounter = 0 {
         didSet { scoreLabel?.text = "Score: \(scoreCounter)"}
     }
     
-    var timer: Timer?
- 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,23 +44,26 @@ class GameVC: UIViewController {
         
         addLableToNaviBar()
         scoreCounter = 0
-        startTimer()
-        
+        timerCounter = 60
         
         cardsArray = game.generateDeck()        
     }
     
     @IBAction func settingsDidTapped(_ sender: UIBarButtonItem) {
+        //pause timer
+                timer?.invalidate()
         let alertSheat = UIAlertController(title: "Game paused", message: nil, preferredStyle: .actionSheet)
-        let resume = UIAlertAction(title: "Resume game", style: .cancel, handler: nil)
         let restartGame = UIAlertAction(title: "Restart game", style: .default) { action in
             //TODO: -New game
-            self.newGame()
+            self.alertForRestartGame()
+        }
+
+        let changeNickname = UIAlertAction(title: "Change nickname", style: .default) { action in
+            self.alertForNameChanging()
         }
         
-        
-        let changeNickname = UIAlertAction(title: "Change nickname", style: .default) { action in
-            self.callAlert()
+        let resume = UIAlertAction(title: "Resume game", style: .cancel) { _ in
+            self.resumeTimer()
         }
         
         alertSheat.addAction(resume)
@@ -77,6 +79,11 @@ class GameVC: UIViewController {
         guard !card.isMatched else { return }
         
         cell?.card = card
+        
+        if !gameHaveBeenStarted {
+            gameHaveBeenStarted = true
+            startTimer()
+        }
                 
         //OPEN FIRST CARD
         if firstIndex == nil {
@@ -119,15 +126,6 @@ class GameVC: UIViewController {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell else {return UICollectionViewCell()}
-
-        let card = cardsArray[indexPath.row]
-        cell.card = card
-        cell.setupCell()
-        return cell
-    }
-    
     
     func openFirstCard(indexpath: IndexPath, card: Card, cell: CardCollectionViewCell?) {
         firstCard = card
@@ -142,24 +140,46 @@ class GameVC: UIViewController {
         firstIndex = nil
         secondIndex = nil
         scoreCounter = 0
-        startTimer()
-        
     }
     
-    func callAlert() {
+    
+    
+    func alertForNameChanging() {
         let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "Ok", style: .default) { _ in
+        let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
             self.timerLabel?.removeFromSuperview()
             self.scoreLabel?.removeFromSuperview()
             self.timer?.invalidate()
 
             self.navigationController?.popViewController(animated: true)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.resumeTimer()
+        }
         alert.addAction(okButton)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
+    
+    func alertForRestartGame() {
+        let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
+            self.timerCounter = self.setTimer
+            self.scoreCounter = 0
+            self.gameHaveBeenStarted = false
+            self.timer?.invalidate()
+
+            self.newGame()
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.resumeTimer()
+        }
+        alert.addAction(okButton)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
     
     func addLableToNaviBar() {
         guard let navigationBar = navigationController?.navigationBar else {return}
@@ -182,6 +202,8 @@ class GameVC: UIViewController {
         
     }
     
+    
+    
     func startTimer() {
         timerCounter = setTimer
         timer?.invalidate()
@@ -192,13 +214,18 @@ class GameVC: UIViewController {
                                      repeats: true)
     }
     
+    func resumeTimer() {
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
+
+    }
+    
+    
     @objc func timerAction() {
         guard timerCounter > 0 else { return }
         timerCounter -= 1
     }
     
-    
-    
+
     
 }
 
@@ -218,6 +245,16 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardsArray.count
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell else {return UICollectionViewCell()}
+
+        let card = cardsArray[indexPath.row]
+        cell.card = card
+        cell.setupCell()
+        return cell
+    }
+    
     
     //aspectRatio 1 : 1.3813
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
