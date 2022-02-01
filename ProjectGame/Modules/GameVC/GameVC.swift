@@ -10,11 +10,12 @@ import UIKit
 class GameVC: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var fuseOutlet: UISlider!
     
     let padding: CGFloat = 20
     let cardsInRow: CGFloat = 3
     let heightAspectRatio: CGFloat = 1.3813
-    var setTimer = 60
+    var setTimer = 30
     
     var cardsArray = [Card]()
     var game = Game()
@@ -30,7 +31,10 @@ class GameVC: UIViewController {
     
     var timer: Timer?
     var timerCounter = 0 {
-        didSet { timerLabel?.text = "Time left: \(timerCounter) sec" }
+        didSet {
+            timerLabel?.text = "Time left: \(timerCounter) sec"
+            fuseOutlet.setValue(Float(timerCounter), animated: true)
+        }
     }
     var scoreCounter = 0 {
         didSet { scoreLabel?.text = "Score: \(scoreCounter)"}
@@ -44,7 +48,9 @@ class GameVC: UIViewController {
         
         addLableToNaviBar()
         scoreCounter = 0
-        timerCounter = 60
+        timerCounter = setTimer
+        
+        setupFuse()
         
         cardsArray = game.generateDeck()        
     }
@@ -216,7 +222,12 @@ class GameVC: UIViewController {
     
     func resumeTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
-
+    }
+    
+    func setupFuse() {
+        fuseOutlet.minimumValue = 0
+        fuseOutlet.maximumValue = Float(setTimer)
+        fuseOutlet.setValue(Float(timerCounter), animated: false)
     }
     
     

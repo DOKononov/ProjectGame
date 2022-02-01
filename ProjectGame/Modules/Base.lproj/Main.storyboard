@@ -89,7 +89,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-uZ-LGe">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="126" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fTj-Xp-LxL">
                                     <size key="itemSize" width="185" height="268"/>
@@ -123,13 +123,19 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vvX-CO-M9c">
+                                <rect key="frame" x="14" y="92" width="386" height="31"/>
+                            </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.90196073060000004" green="0.8392156959" blue="0.6784313917" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="tQc-uZ-LGe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="39U-gm-tgd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tQc-uZ-LGe" secondAttribute="bottom" id="CgW-b6-WYj"/>
                             <constraint firstItem="tQc-uZ-LGe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EIw-SD-WV7"/>
+                            <constraint firstItem="vvX-CO-M9c" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="SUR-HV-pOT"/>
+                            <constraint firstItem="vvX-CO-M9c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ZZ7-uZ-sjg"/>
+                            <constraint firstItem="tQc-uZ-LGe" firstAttribute="top" secondItem="vvX-CO-M9c" secondAttribute="bottom" constant="4" id="chU-7u-8JK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vvX-CO-M9c" secondAttribute="trailing" constant="16" id="sJf-ld-jVL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tQc-uZ-LGe" secondAttribute="trailing" id="xXq-xP-ot5"/>
                         </constraints>
                     </view>
@@ -143,6 +149,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="tQc-uZ-LGe" id="vj4-ee-EZT"/>
+                        <outlet property="fuseOutlet" destination="vvX-CO-M9c" id="edw-5l-lQN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
