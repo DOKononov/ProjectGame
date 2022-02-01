@@ -228,6 +228,7 @@ class GameVC: UIViewController {
         fuseOutlet.minimumValue = 0
         fuseOutlet.maximumValue = Float(setTimer)
         fuseOutlet.setValue(Float(timerCounter), animated: false)
+
     }
     
     
