@@ -24,6 +24,7 @@
 		407FBAB327A679CA004067A6 /* UIViewController+getVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407FBAB227A679CA004067A6 /* UIViewController+getVC.swift */; };
 		407FBAB527A67A55004067A6 /* UIStoryboard+main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407FBAB427A67A55004067A6 /* UIStoryboard+main.swift */; };
 		407FBAB727A67CDA004067A6 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407FBAB627A67CDA004067A6 /* CoreDataService.swift */; };
+		40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		407FBAB227A679CA004067A6 /* UIViewController+getVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+getVC.swift"; sourceTree = "<group>"; };
 		407FBAB427A67A55004067A6 /* UIStoryboard+main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+main.swift"; sourceTree = "<group>"; };
 		407FBAB627A67CDA004067A6 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +66,17 @@
 			children = (
 				4066E727278EF146003793CF /* LaunchScreen.storyboard */,
 				4066E725278EF146003793CF /* Assets.xcassets */,
-				407FBAB027A6726B004067A6 /* belwe_bd_bt */,
+				40193A0927A929B200E19E7F /* fonts */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		40193A0927A929B200E19E7F /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				407FBAB027A6726B004067A6 /* belwe_bd_bt */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		4029D74E2793E99F009CF961 /* Models */ = {
@@ -150,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				4066E732278EF1B1003793CF /* CardCollectionViewCell.swift */,
+				40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -254,6 +265,7 @@
 			files = (
 				407FBAB327A679CA004067A6 /* UIViewController+getVC.swift in Sources */,
 				4029D7752793F970009CF961 /* Game.swift in Sources */,
+				40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */,
 				405F98C127A5B65E00DD7148 /* Colors.swift in Sources */,
 				4066E733278EF1B1003793CF /* CardCollectionViewCell.swift in Sources */,
 				407FBAB727A67CDA004067A6 /* CoreDataService.swift in Sources */,
