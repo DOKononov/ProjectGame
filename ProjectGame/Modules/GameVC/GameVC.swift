@@ -6,17 +6,20 @@
 //
 
 import UIKit
+import CoreData
 
-class GameVC: UIViewController {
+final class GameVC: UIViewController {
     
+    @IBOutlet weak var fuseOutlet: UIProgressView!
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var fuseOutlet: UISlider!
+    
     
     let padding: CGFloat = 20
     let cardsInRow: CGFloat = 3
     let heightAspectRatio: CGFloat = 1.3813
-    var setTimer = 30
+    var setTimer = 15
     
+    var playerName = ""
     var cardsArray = [Card]()
     var game = Game()
     var gameHaveBeenStarted = false
@@ -33,7 +36,7 @@ class GameVC: UIViewController {
     var timerCounter = 0 {
         didSet {
             timerLabel?.text = "Time left: \(timerCounter) sec"
-            fuseOutlet.setValue(Float(timerCounter), animated: true)
+            setupFuse()
         }
     }
     var scoreCounter = 0 {
@@ -49,12 +52,13 @@ class GameVC: UIViewController {
         addLableToNaviBar()
         scoreCounter = 0
         timerCounter = setTimer
-        
         setupFuse()
         
         cardsArray = game.generateDeck()        
     }
     
+    
+    //MARK: -settingsDidTapped
     @IBAction func settingsDidTapped(_ sender: UIBarButtonItem) {
         //pause timer
                 timer?.invalidate()
@@ -79,7 +83,9 @@ class GameVC: UIViewController {
         
     }
     
+    //MARK: -didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
         let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionViewCell
         let card = cardsArray[indexPath.row]
         guard !card.isMatched else { return }
@@ -91,11 +97,11 @@ class GameVC: UIViewController {
             startTimer()
         }
                 
-        //OPEN FIRST CARD
+        //MARK: OPEN FIRST CARD
         if firstIndex == nil {
             openFirstCard(indexpath: indexPath, card: card, cell: cell)
             
-            //OPEN SECOND CARD
+            //MARK: OPEN SECOND CARD
         } else if secondIndex == nil, firstIndex != indexPath  {
                     
             secondCard = card
@@ -103,14 +109,14 @@ class GameVC: UIViewController {
             card.isFaceUp = true
             cell?.flipCard()
             
-            //CHECK FOR MATCH
+            //MARK: CHECK FOR MATCH
             if firstCard?.name == secondCard?.name {
                 firstCard?.isMatched = true
                 secondCard?.isMatched = true
                 scoreCounter += 1
             }
             
-            //FLIP BOTH CARDS BACK
+            //MARK: FLIP BOTH CARDS BACK
         } else {
             guard let firstIndex = firstIndex else { return }
             guard let secondIndex = secondIndex else { return }
@@ -127,12 +133,12 @@ class GameVC: UIViewController {
             cellOne?.flipCard()
             cellTwo?.flipCard()
             
-            //OPEN NEW FIRST CARD
+            //MARK: OPEN NEW FIRST CARD
             openFirstCard(indexpath: indexPath, card: card, cell: cell)
         }
     }
     
-    
+    //MARK: openFirstCard()
     func openFirstCard(indexpath: IndexPath, card: Card, cell: CardCollectionViewCell?) {
         firstCard = card
         firstIndex = indexpath
@@ -140,6 +146,7 @@ class GameVC: UIViewController {
         cell?.flipCard()
     }
     
+    //MARK: newGame()
     func newGame() {
         cardsArray = game.generateDeck()
         collectionView.reloadData()
@@ -148,8 +155,28 @@ class GameVC: UIViewController {
         scoreCounter = 0
     }
     
+    //MARK: gameOver()
+    func gameOver() {
+        let alert = UIAlertController(title: "GAME OVER!", message: nil, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Ok", style: .default) { _ in
+            guard let nextVC = ScoreVC.getVC(from: .main) as? ScoreVC else {return}
+            self.timerLabel?.removeFromSuperview()
+            self.scoreLabel?.removeFromSuperview()
+            
+            if self.scoreCounter > 0 {
+                let player = Player(context: CoreDataService.managadObjectContext)
+                player.score = Int64(self.scoreCounter)
+                player.name = self.playerName
+                CoreDataService.saveContext()
+            }
+            
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
+    }
     
-    
+    //MARK: alertForNameChanging()
     func alertForNameChanging() {
         let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
@@ -167,6 +194,8 @@ class GameVC: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    
+    //MARK: alertForRestartGame()
     func alertForRestartGame() {
         let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
@@ -186,7 +215,7 @@ class GameVC: UIViewController {
     }
     
     
-    
+    //MARK: addLableToNaviBar()
     func addLableToNaviBar() {
         guard let navigationBar = navigationController?.navigationBar else {return}
         let timerLabelFrame = CGRect(x: navigationBar.frame.width * 0.25,
@@ -194,22 +223,23 @@ class GameVC: UIViewController {
                                      width: navigationBar.frame.width * 0.45,
                                      height: navigationBar.frame.height)
         timerLabel = UILabel(frame: timerLabelFrame)
+        timerLabel?.font = UIFont(name: "BelweBT-Bold", size: 20)
         
         let scoreLabelFrame = CGRect(x: navigationBar.frame.width * 0.7,
                                      y: 0,
                                      width: navigationBar.frame.width / 4,
                                      height: navigationBar.frame.height)
         scoreLabel = UILabel(frame: scoreLabelFrame)
+        scoreLabel?.font = UIFont(name: "BelweBT-Bold", size: 20)
 
         if let timerLabel = timerLabel, let scoreLabel = scoreLabel {
             navigationBar.addSubview(timerLabel)
             navigationBar.addSubview(scoreLabel)
         }
-        
     }
     
     
-    
+    //MARK: startTimer()
     func startTimer() {
         timerCounter = setTimer
         timer?.invalidate()
@@ -220,21 +250,25 @@ class GameVC: UIViewController {
                                      repeats: true)
     }
     
+    
     func resumeTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
     }
     
+    
     func setupFuse() {
-        fuseOutlet.minimumValue = 0
-        fuseOutlet.maximumValue = Float(setTimer)
-        fuseOutlet.setValue(Float(timerCounter), animated: false)
-
+        fuseOutlet.progress = Float(timerCounter) / Float(setTimer)
     }
     
     
     @objc func timerAction() {
-        guard timerCounter > 0 else { return }
-        timerCounter -= 1
+        if timerCounter <= 0 {
+        gameOver()
+            timer?.invalidate()
+        } else {
+            timerCounter -= 1
+        }
+        
     }
     
 

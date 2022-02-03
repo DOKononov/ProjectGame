@@ -7,7 +7,7 @@
 
 import Foundation
  
-final class Card: Codable {
+final class Card {
     
     var name: String
     var isFaceUp: Bool

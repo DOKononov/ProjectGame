@@ -6,33 +6,65 @@
 //
 
 import UIKit
+import CoreData
 
-class ScoreVC: UIViewController{
+final class ScoreVC: UIViewController, NSFetchedResultsControllerDelegate {
 
 
     @IBOutlet weak var tableView: UITableView!
     
-    let scoreArray = ["100", "97", "93", "44", "15", "33", "23", "33", "33", "44", "34", "34", "23", "97", "93", "44", "15", "33", "23", "33", "33", "44", "34", "34", "23"]
-    let namesArray = ["Dima", "Kolia", "Petia", "Vasia", "Serega", "Kolia", "Petia", "Vasia", "Serega", "Kolia", "Petia", "Vasia", "Serega", "Kolia", "Petia", "Vasia", "Serega", "Kolia", "Petia", "Vasia", "Serega", "Kolia", "Petia", "Vasia", "Serega"]
+    private var fetchResultController: NSFetchedResultsController<Player>!
+    
+    var players: [Player] = [] {
+        didSet { tableView.reloadData() }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupFetchResultController()
+        loadPlayers()
+        
         tableView.delegate = self
         tableView.dataSource = self
-        
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
     }
     
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        navigationController?.popToRootViewController(animated: true)
+    }
     
+    func setupFetchResultController() {
+        let request = Player.fetchRequest()
+        let scoreDescriptor = NSSortDescriptor(key: "score", ascending: false)
+        request.sortDescriptors = [scoreDescriptor]
+        
+        fetchResultController = NSFetchedResultsController(fetchRequest: request,
+                                                           managedObjectContext: CoreDataService.managadObjectContext,
+                                                           sectionNameKeyPath: nil,
+                                                           cacheName: nil)
+        
+        fetchResultController.delegate = self
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        loadPlayers()
+    }
+    
+    func loadPlayers() {
+        try? fetchResultController.performFetch()
+        if let result = fetchResultController.fetchedObjects {
+            players = result
+        }
+    }
 }
 
 
 extension ScoreVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return namesArray.count
+        return players.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,8 +73,8 @@ extension ScoreVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.rankLabel.text = "\(indexPath.row + 1)"
         
-        cell.scoreLabel.text = scoreArray[indexPath.row]
-        cell.playerNameLabel.text = namesArray[indexPath.row]
+        cell.scoreLabel.text = String(players[indexPath.row].score)
+        cell.playerNameLabel.text = players[indexPath.row].name
         
         
         return cell

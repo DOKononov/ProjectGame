@@ -22,7 +22,13 @@ class LoginVC: UIViewController {
 
 
     @IBAction func startDidPressed(_ sender: UIButton) {
-       let nextVC =  GameVC.getVC(from: .main)
+        
+        guard let nextVC =  GameVC.getVC(from: .main) as? GameVC else {return}
+        if let name = nicknameTF.text {
+            nextVC.playerName = name
+        }
+       
+        
         navigationController?.pushViewController(nextVC, animated: true)
         
     }
