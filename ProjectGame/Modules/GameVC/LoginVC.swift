@@ -13,16 +13,18 @@ class LoginVC: UIViewController {
     @IBOutlet weak var nicknameTF: UITextField!
     @IBOutlet weak var startButton: UIButton!
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTF()
         setUpButton()
-     
+
     }
 
 
     @IBAction func startDidPressed(_ sender: UIButton) {
-        
+        guard nicknameTF.hasText else {return}
         guard let nextVC =  GameVC.getVC(from: .main) as? GameVC else {return}
         if let name = nicknameTF.text {
             nextVC.playerName = name

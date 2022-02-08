@@ -18,16 +18,19 @@ final class GameVC: UIViewController {
     let cardsInRow: CGFloat = 3
     let heightAspectRatio: CGFloat = 1.3813
     var setTimer = 15
+    var decksize = 20
     
     var playerName = ""
-    var cardsArray = [Card]()
-    var game = Game()
+    var cardsArray = [Card]() {
+        didSet { collectionView.reloadData() }
+    }
     var gameHaveBeenStarted = false
     
     var firstIndex: IndexPath?
     var secondIndex: IndexPath?
     var firstCard: Card?
     var secondCard: Card?
+    var game = Game()
     
     var timerLabel: UILabel?
     var scoreLabel: UILabel?
@@ -54,7 +57,16 @@ final class GameVC: UIViewController {
         timerCounter = setTimer
         setupFuse()
         
-        cardsArray = game.generateDeck()        
+        game = Game(deckSize: decksize)
+      
+        NetworkService().getCards { [weak self] deck in
+            guard let currentDeck = self?.game.generateDeckOnline(deckFromAPI: deck) else {return}
+            self?.cardsArray = currentDeck
+        }
+      
+//        cardsArray = game.generateDeckOffline()
+        
+        
     }
     
     
@@ -85,10 +97,11 @@ final class GameVC: UIViewController {
     
     //MARK: -didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionViewCell
         let card = cardsArray[indexPath.row]
         guard !card.isMatched else { return }
+        
         
         cell?.card = card
         
@@ -106,14 +119,18 @@ final class GameVC: UIViewController {
                     
             secondCard = card
             secondIndex = indexPath
-            card.isFaceUp = true
+            card.isFacedUp = true
             cell?.flipCard()
             
             //MARK: CHECK FOR MATCH
-            if firstCard?.name == secondCard?.name {
+            if firstCard?.id == secondCard?.id {
                 firstCard?.isMatched = true
                 secondCard?.isMatched = true
+                
+                timerCounter += 5
                 scoreCounter += 1
+                
+                
             }
             
             //MARK: FLIP BOTH CARDS BACK
@@ -127,8 +144,8 @@ final class GameVC: UIViewController {
             self.firstIndex = nil
             self.secondIndex = nil
             
-            cardsArray[firstIndex.row].isFaceUp = false
-            cardsArray[secondIndex.row].isFaceUp = false
+            cardsArray[firstIndex.row].isFacedUp = false
+            cardsArray[secondIndex.row].isFacedUp = false
             
             cellOne?.flipCard()
             cellTwo?.flipCard()
@@ -142,13 +159,13 @@ final class GameVC: UIViewController {
     func openFirstCard(indexpath: IndexPath, card: Card, cell: CardCollectionViewCell?) {
         firstCard = card
         firstIndex = indexpath
-        card.isFaceUp = true
+        card.isFacedUp = true
         cell?.flipCard()
     }
     
     //MARK: newGame()
     func newGame() {
-        cardsArray = game.generateDeck()
+        cardsArray = Game(deckSize: decksize).generateDeckOffline()
         collectionView.reloadData()
         firstIndex = nil
         secondIndex = nil
@@ -285,7 +302,7 @@ final class GameVC: UIViewController {
 
 
 
-//MARK: -extension GameVC
+//MARK: -extension GameVC+CollectionView
 extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

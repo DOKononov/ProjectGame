@@ -8,10 +8,10 @@
 import Foundation
 
 struct Game {
-  
-    var deckSize = 12
     
-    let cardsNames = ["card1",
+    var deckSize = 0
+    
+    var cardsNames = ["card1",
                       "card2",
                       "card3",
                       "card4",
@@ -26,8 +26,12 @@ struct Game {
                       "card13",
     ]
     
-
-    func generateDeck() -> [Card]{
+    init (deckSize: Int = 12, deck: [Card] = []) {
+        self.deckSize = deckSize
+    }
+    
+    
+    func generateDeckOffline() -> [Card]{
         
         var tempDeck = [Card]()
         var uniqueName = [String]()
@@ -43,4 +47,23 @@ struct Game {
         return tempDeck.shuffled()
     }
     
+    func generateDeckOnline(deckFromAPI:[Card]) -> [Card] {
+        var tempDeck = [Card]()
+        var uniqueName = [String]()
+        while tempDeck.count < deckSize {
+            if let newCard = deckFromAPI.randomElement() {
+                if !uniqueName.contains(newCard.name) {
+                    uniqueName.append(newCard.name)
+                    tempDeck.append(newCard)
+                    tempDeck.append(newCard)
+                }
+            }
+        }
+        return tempDeck.shuffled()
+    }
+    
+    
+    
 }
+
+

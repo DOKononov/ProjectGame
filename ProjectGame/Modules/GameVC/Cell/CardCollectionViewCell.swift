@@ -24,9 +24,9 @@ class CardCollectionViewCell: UICollectionViewCell {
             imageView.alpha = 0.5
         }
         
-        if card.isFaceUp {
-            imageView.image = UIImage(named:  card.name)
-        } else if !card.isFaceUp {
+        if card.isFacedUp {
+            imageView.loadImage(from: card.image!)
+        } else if !card.isFacedUp {
             imageView.image = UIImage(named: "cardBack")
         }        
     }
@@ -48,8 +48,13 @@ class CardCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        if card.isFaceUp {
-            flipWithAnimation(cardName: card.name)
+        if card.isFacedUp {
+            UIView.transition(with: imageView,
+                              duration: 0.5,
+                              options: [.transitionFlipFromLeft]) {
+                guard let image = self.card.image else {return}
+                self.imageView.loadImage(from: image)
+            }
         } else {
             flipWithAnimation(cardName: "cardBack")
         }
