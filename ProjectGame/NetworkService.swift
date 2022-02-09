@@ -22,7 +22,8 @@ struct NetworkService {
         URLSession.shared.dataTask(with: request) { responceData, responce, error in
             if let error = error {
                 print(error.localizedDescription)
-            } else if let data = responceData {
+            } else if let data = responceData, let responce = responce as? HTTPURLResponse {
+                print("responce.statusCode: \(responce.statusCode)")
                 if let deck = try? JSONDecoder().decode(Deck.self, from: data) {
                     DispatchQueue.main.async {
                         complition(deck.deck)

@@ -22,11 +22,14 @@ class CardCollectionViewCell: UICollectionViewCell {
     func setupCell() {
         if card.isMatched {
             imageView.alpha = 0.5
+        } else {
+            imageView.alpha = 1
         }
         
         if card.isFacedUp {
-            imageView.loadImage(from: card.image!)
-        } else if !card.isFacedUp {
+            guard let imageURL = card.image else {return}
+            imageView.loadImage(from: imageURL)
+        } else {
             imageView.image = UIImage(named: "cardBack")
         }        
     }
@@ -34,7 +37,7 @@ class CardCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        imageView.image = nil
+//        imageView.image = nil
         imageView.alpha = 1.0
     }
     
@@ -52,8 +55,8 @@ class CardCollectionViewCell: UICollectionViewCell {
             UIView.transition(with: imageView,
                               duration: 0.5,
                               options: [.transitionFlipFromLeft]) {
-                guard let image = self.card.image else {return}
-                self.imageView.loadImage(from: image)
+                guard let imageURL = self.card.image else {return}
+                self.imageView.loadImage(from: imageURL)
             }
         } else {
             flipWithAnimation(cardName: "cardBack")
