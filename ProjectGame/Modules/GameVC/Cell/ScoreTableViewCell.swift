@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ScoreTableViewCell: UITableViewCell {
+final class ScoreTableViewCell: UITableViewCell {
 
     @IBOutlet weak var rankLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!

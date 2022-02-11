@@ -10,39 +10,40 @@ import CoreData
 
 final class GameVC: UIViewController {
     
-    @IBOutlet weak var fuseOutlet: UIProgressView!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var fuseOutlet: UIProgressView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     
-    let padding: CGFloat = 20
-    let cardsInRow: CGFloat = 3
-    let heightAspectRatio: CGFloat = 1.3813
-    var setTimer = 15
-    var decksize = 20
+    private let padding: CGFloat = 20
+    private let cardsInRow: CGFloat = 3
+    private let heightAspectRatio: CGFloat = 1.3813
+    
+    private var setTimer = 15
+    private var decksize = 20
     
     var playerName = ""
-    var cardsArray = [Card]() {
+    private var cardsArray = [Card]() {
         didSet { collectionView.reloadData() }
     }
     var gameHaveBeenStarted = false
     
-    var firstIndex: IndexPath?
-    var secondIndex: IndexPath?
-    var firstCard: Card?
-    var secondCard: Card?
-    var game = Game()
+    private var firstIndex: IndexPath?
+    private var secondIndex: IndexPath?
+    private var firstCard: Card?
+    private var secondCard: Card?
+    private var game = Game()
     
-    var timerLabel: UILabel?
-    var scoreLabel: UILabel?
+    private var timerLabel: UILabel?
+    private var scoreLabel: UILabel?
     
-    var timer: Timer?
-    var timerCounter = 0 {
+    private var timer: Timer?
+    private var timerCounter = 0 {
         didSet {
             timerLabel?.text = "Time left: \(timerCounter) sec"
             setupFuse()
         }
     }
-    var scoreCounter = 0 {
+    private var scoreCounter = 0 {
         didSet { scoreLabel?.text = "Score: \(scoreCounter)"}
     }
     
@@ -71,7 +72,7 @@ final class GameVC: UIViewController {
     
     
     //MARK: -settingsDidTapped
-    @IBAction func settingsDidTapped(_ sender: UIBarButtonItem) {
+    @IBAction private func settingsDidTapped(_ sender: UIBarButtonItem) {
         //pause timer
                 timer?.invalidate()
         let alertSheat = UIAlertController(title: "Game paused", message: nil, preferredStyle: .actionSheet)
@@ -173,7 +174,7 @@ final class GameVC: UIViewController {
     }
     
     //MARK: gameOver()
-    func gameOver() {
+    private func gameOver() {
         let alert = UIAlertController(title: "GAME OVER!", message: nil, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .default) { _ in
             guard let nextVC = ScoreVC.getVC(from: .main) as? ScoreVC else {return}
@@ -194,7 +195,7 @@ final class GameVC: UIViewController {
     }
     
     //MARK: alertForNameChanging()
-    func alertForNameChanging() {
+    private func alertForNameChanging() {
         let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
             self.timerLabel?.removeFromSuperview()
@@ -213,7 +214,7 @@ final class GameVC: UIViewController {
     
     
     //MARK: alertForRestartGame()
-    func alertForRestartGame() {
+    private func alertForRestartGame() {
         let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
             self.timerCounter = self.setTimer
@@ -233,7 +234,7 @@ final class GameVC: UIViewController {
     
     
     //MARK: addLableToNaviBar()
-    func addLableToNaviBar() {
+    private func addLableToNaviBar() {
         guard let navigationBar = navigationController?.navigationBar else {return}
         let timerLabelFrame = CGRect(x: navigationBar.frame.width * 0.25,
                                      y: 0,
@@ -257,7 +258,7 @@ final class GameVC: UIViewController {
     
     
     //MARK: startTimer()
-    func startTimer() {
+    private func startTimer() {
         timerCounter = setTimer
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: 1,
@@ -268,12 +269,12 @@ final class GameVC: UIViewController {
     }
     
     
-    func resumeTimer() {
+    private func resumeTimer() {
         self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
     }
     
     
-    func setupFuse() {
+    private func setupFuse() {
         fuseOutlet.progress = Float(timerCounter) / Float(setTimer)
     }
     

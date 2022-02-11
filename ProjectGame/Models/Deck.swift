@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Deck: Decodable {
+final class Deck: Decodable {
     
     var deck: [Card] = []
 

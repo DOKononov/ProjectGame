@@ -9,9 +9,11 @@ import Foundation
 import UIKit
 
 
+//https://us.api.blizzard.com/hearthstone/cards?locale=en_US&type=minion&pageSize=0&access_token=USpvxt4O1BaJe5ip77pqdCcy4WDX1IdPdh
+
 struct NetworkService {
     private let host = "https://us.api.blizzard.com/hearthstone"
-    private let token = "_token=USnh4Fe8qLg0eS8GvjzOV23qbU5EDhBOFC"
+    private let token = "_token=USpvxt4O1BaJe5ip77pqdCcy4WDX1IdPdh"
     
     func getCards(complition: @escaping ([Card]) -> Void) {
         
@@ -38,7 +40,3 @@ struct NetworkService {
     
 }
 
-
-//NetworkService().getCards { deck in
-//    deck.deck.forEach { print($0.name)}
-//}

@@ -7,10 +7,10 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+final class LoginVC: UIViewController {
     
-    @IBOutlet weak var nicknameTF: UITextField!
-    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet private weak var nicknameTF: UITextField!
+    @IBOutlet private weak var startButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class LoginVC: UIViewController {
         LoginVC.setupCustom(textField: nicknameTF, placeholderText: "Enter nickname")
     }
     
-    @IBAction func startDidPressed(_ sender: UIButton) {
+    @IBAction private func startDidPressed(_ sender: UIButton) {
         guard nicknameTF.hasText else {return}
         guard let nextVC =  GameVC.getVC(from: .main) as? GameVC else {return}
         guard let name = nicknameTF.text else {return}
@@ -26,7 +26,6 @@ class LoginVC: UIViewController {
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

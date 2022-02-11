@@ -8,18 +8,19 @@
 import UIKit
 
 
-class CardCollectionViewCell: UICollectionViewCell {
+final class CardCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: UIImageView!
     var card = Card(name: "cardBack")
     
     override var isSelected: Bool {
         didSet {
-//            print(isSelected)
+//            print(self.isSelected)
         }
     }
     
     func setupCell() {
+        
         if card.isMatched {
             imageView.alpha = 0.5
         } else {
@@ -37,7 +38,7 @@ class CardCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-//        imageView.image = nil
+        imageView.image = nil
         imageView.alpha = 1.0
     }
     
