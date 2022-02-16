@@ -32,6 +32,7 @@
 		40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */; };
 		40D3864227A9855E0075ACCB /* BelweBT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40D3864127A9855E0075ACCB /* BelweBT-Bold.ttf */; };
 		56A1C88827B9564700105A2D /* ScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1C88727B9564700105A2D /* ScoreViewModel.swift */; };
+		56A1C8AE27BD653100105A2D /* CardsDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1C8AD27BD653100105A2D /* CardsDataDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		40D3864127A9855E0075ACCB /* BelweBT-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BelweBT-Bold.ttf"; path = "belwe_bd_bt/BelweBT-Bold.ttf"; sourceTree = "<group>"; };
 		56A1C88727B9564700105A2D /* ScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewModel.swift; sourceTree = "<group>"; };
+		56A1C8AD27BD653100105A2D /* CardsDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsDataDownloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				4080C27527AFDD4800331A96 /* NetworkService.swift */,
+				56A1C8AD27BD653100105A2D /* CardsDataDownloader.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				40193A0827A9229200E19E7F /* ScoreVC.swift in Sources */,
 				4029D74D2793E994009CF961 /* Card.swift in Sources */,
 				40645FAD27B02A9900C7F23F /* Deck.swift in Sources */,
+				56A1C8AE27BD653100105A2D /* CardsDataDownloader.swift in Sources */,
 				4066E724278EF146003793CF /* ProjectGame.xcdatamodeld in Sources */,
 				405F98C327A5B67D00DD7148 /* LoginVC.swift in Sources */,
 				40A6108727B425DA0050F44A /* UIViewController+CustomElements.swift in Sources */,

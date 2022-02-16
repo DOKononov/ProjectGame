@@ -6,38 +6,40 @@
 //
 
 import Foundation
+import UIKit
  
 final class Card: Decodable {
 
     let id: Int?
     let name: String
-    let image: String?
+    let imageUrl: String?
     var isFacedUp: Bool
     var isMatched: Bool
+    var image: UIImage?
+
     
-    enum CodingKeys: CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case name
-        case image
+        case imageUrl = "image"
         case isFaceUp
         case isMatched
     }
 
-    init(id: Int? = nil, name: String, image: String? = nil, isFaceUp: Bool = false, isMatched: Bool = false) {
+    init(id: Int? = nil, name: String, imageUrl: String? = nil, isFaceUp: Bool = false, isMatched: Bool = false) {
         self.id = id
         self.name = name
-        self.image = image
+        self.imageUrl = imageUrl
         self.isFacedUp = isFaceUp
         self.isMatched = isMatched
 
     }
     
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(Int.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
-        self.image = try container.decode(String.self, forKey: .image)
+        self.imageUrl = try container.decode(String.self, forKey: .imageUrl)
         self.isFacedUp = false
         self.isMatched = false
     }

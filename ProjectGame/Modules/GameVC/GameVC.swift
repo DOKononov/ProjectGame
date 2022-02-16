@@ -47,6 +47,8 @@ final class GameVC: UIViewController {
         didSet { scoreLabel?.text = "Score: \(scoreCounter)"}
     }
     
+    private lazy var cardsDataDownloader = CardsDataDownloader()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,9 @@ final class GameVC: UIViewController {
       
         NetworkService().getCards { [weak self] deck in
             guard let currentDeck = self?.game.generateDeckOnline(deckFromAPI: deck) else {return}
-            self?.cardsArray = currentDeck
+            self?.cardsDataDownloader.download(currentDeck) { completeDeck in
+                self?.cardsArray = completeDeck
+            }
         }
       
 //        cardsArray = game.generateDeckOffline()
