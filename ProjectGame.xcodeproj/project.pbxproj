@@ -31,6 +31,7 @@
 		40CF9B3C27AC021600C25A4F /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF9B3A27AC021600C25A4F /* Player+CoreDataProperties.swift */; };
 		40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */; };
 		40D3864227A9855E0075ACCB /* BelweBT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40D3864127A9855E0075ACCB /* BelweBT-Bold.ttf */; };
+		56A1C88827B9564700105A2D /* ScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1C88727B9564700105A2D /* ScoreViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		40CF9B3A27AC021600C25A4F /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
 		40D3864127A9855E0075ACCB /* BelweBT-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BelweBT-Bold.ttf"; path = "belwe_bd_bt/BelweBT-Bold.ttf"; sourceTree = "<group>"; };
+		56A1C88727B9564700105A2D /* ScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,7 +168,7 @@
 				4066E737278EF1DE003793CF /* Cell */,
 				405F98C227A5B67D00DD7148 /* LoginVC.swift */,
 				4066E734278EF1C9003793CF /* GameVC.swift */,
-				40193A0727A9229200E19E7F /* ScoreVC.swift */,
+				56A1C88627B9561D00105A2D /* ScoreVC */,
 			);
 			path = GameVC;
 			sourceTree = "<group>";
@@ -223,6 +225,15 @@
 				40CF9B3A27AC021600C25A4F /* Player+CoreDataProperties.swift */,
 			);
 			path = CDModels;
+			sourceTree = "<group>";
+		};
+		56A1C88627B9561D00105A2D /* ScoreVC */ = {
+			isa = PBXGroup;
+			children = (
+				40193A0727A9229200E19E7F /* ScoreVC.swift */,
+				56A1C88727B9564700105A2D /* ScoreViewModel.swift */,
+			);
+			path = ScoreVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +314,7 @@
 				40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */,
 				4080C27627AFDD4800331A96 /* NetworkService.swift in Sources */,
 				40C4B67E27B145E200DEFE5F /* UIImage+loadImage.swift in Sources */,
+				56A1C88827B9564700105A2D /* ScoreViewModel.swift in Sources */,
 				405F98C127A5B65E00DD7148 /* CGColor+CustomColor.swift in Sources */,
 				4066E733278EF1B1003793CF /* CardCollectionViewCell.swift in Sources */,
 				407FBAB727A67CDA004067A6 /* CoreDataService.swift in Sources */,
