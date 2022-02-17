@@ -62,15 +62,7 @@ final class GameVC: UIViewController {
         
         game = Game(deckSize: decksize)
       
-        NetworkService().getCards { [weak self] deck in
-            guard let currentDeck = self?.game.generateDeckOnline(deckFromAPI: deck) else {return}
-            self?.cardsDataDownloader.download(currentDeck) { completeDeck in
-                self?.cardsArray = completeDeck
-            }
-        }
-      
-//        cardsArray = game.generateDeckOffline()
-        
+        getDeckFromNetwork()
         
     }
     
@@ -170,7 +162,11 @@ final class GameVC: UIViewController {
     
     //MARK: newGame()
     func newGame() {
-        cardsArray = Game(deckSize: decksize).generateDeckOffline()
+        
+        cardsArray.forEach {$0.isFacedUp = false}
+        cardsArray.forEach {$0.isMatched = false}
+        
+        getDeckFromNetwork()
         collectionView.reloadData()
         firstIndex = nil
         secondIndex = nil
@@ -280,6 +276,15 @@ final class GameVC: UIViewController {
     
     private func setupFuse() {
         fuseOutlet.progress = Float(timerCounter) / Float(setTimer)
+    }
+    
+    func getDeckFromNetwork() {
+        NetworkService().getCards { [weak self] deck in
+            guard let currentDeck = self?.game.generateDeckOnline(deckFromAPI: deck) else {return}
+            self?.cardsDataDownloader.download(currentDeck) { completeDeck in
+                self?.cardsArray = completeDeck
+            }
+        }
     }
     
     

@@ -29,13 +29,13 @@ final class CardsDataDownloader {
                       let imageUrl = URL(string: imageUrlStr),
                       let data = try? Data(contentsOf: imageUrl),
                       let image = UIImage(data: data) else {
-                          print("\(Self.self): image NOT LOADED with url \(card.imageUrl)")
+//                          print("\(Self.self): image NOT LOADED with url \(card.imageUrl)")
                           dispatchGroup.leave()
                           return
                       }
                 self?.safeWriteDataQueue.async {
                     card.image = image
-                    print("\(Self.self): image loaded with url \(card.imageUrl)")
+//                    print("\(Self.self): image loaded with url \(card.imageUrl)")
                     dispatchGroup.leave()
                 }
             }

@@ -48,7 +48,7 @@ final class ScoreViewModel: NSObject, ScoreViewModelProtocol, NSFetchedResultsCo
                                                            managedObjectContext: CoreDataService.managadObjectContext,
                                                            sectionNameKeyPath: nil,
                                                            cacheName: nil)
-        
+        fetchResultController.delegate = self
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
