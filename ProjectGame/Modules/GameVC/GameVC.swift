@@ -12,25 +12,36 @@ final class GameVC: UIViewController {
     
     @IBOutlet private weak var fuseOutlet: UIProgressView!
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     private let padding: CGFloat = 20
     private let cardsInRow: CGFloat = 3
     private let heightAspectRatio: CGFloat = 1.3813
     
-    private var setTimer = 15
-    private var decksize = 20
+    private var setTimer = 10
+    private var decksize = 12
     
     var playerName = ""
     private var cardsArray = [Card]() {
         didSet { collectionView.reloadData() }
     }
+    
+    private var cardsLeftInDeck = 0 {
+        didSet {
+            if cardsLeftInDeck == 0 {
+                newGame()
+            }
+        }
+    }
+    
     var gameHaveBeenStarted = false
     
     private var firstIndex: IndexPath?
     private var secondIndex: IndexPath?
     private var firstCard: Card?
     private var secondCard: Card?
+    
     private var game = Game()
     
     private var timerLabel: UILabel?
@@ -48,7 +59,7 @@ final class GameVC: UIViewController {
     }
     
     private lazy var cardsDataDownloader = CardsDataDownloader()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +67,15 @@ final class GameVC: UIViewController {
         collectionView.delegate = self
         
         addLableToNaviBar()
+        activityIndicator.scaleIndicator(factor: 2)
         scoreCounter = 0
         timerCounter = setTimer
         setupFuse()
         
+        
         game = Game(deckSize: decksize)
-      
-        getDeckFromNetwork()
+        newGame()
+        
         
     }
     
@@ -70,13 +83,13 @@ final class GameVC: UIViewController {
     //MARK: -settingsDidTapped
     @IBAction private func settingsDidTapped(_ sender: UIBarButtonItem) {
         //pause timer
-                timer?.invalidate()
+        timer?.invalidate()
         let alertSheat = UIAlertController(title: "Game paused", message: nil, preferredStyle: .actionSheet)
         let restartGame = UIAlertAction(title: "Restart game", style: .default) { action in
             //TODO: -New game
             self.alertForRestartGame()
         }
-
+        
         let changeNickname = UIAlertAction(title: "Change nickname", style: .default) { action in
             self.alertForNameChanging()
         }
@@ -99,41 +112,36 @@ final class GameVC: UIViewController {
         let card = cardsArray[indexPath.row]
         guard !card.isMatched else { return }
         
-        
-        cell?.card = card
-        
         if !gameHaveBeenStarted {
             gameHaveBeenStarted = true
             startTimer()
         }
-                
+        
         //MARK: OPEN FIRST CARD
         if firstIndex == nil {
             openFirstCard(indexpath: indexPath, card: card, cell: cell)
             
             //MARK: OPEN SECOND CARD
         } else if secondIndex == nil, firstIndex != indexPath  {
-                    
+            
             secondCard = card
             secondIndex = indexPath
             card.isFacedUp = true
-            cell?.flipCard()
+            cell?.flipCard(card: card)
             
             //MARK: CHECK FOR MATCH
             if firstCard?.id == secondCard?.id {
                 firstCard?.isMatched = true
                 secondCard?.isMatched = true
                 
-                timerCounter += 5
+                cardsLeftInDeck -= 2
+                timerCounter += 3
                 scoreCounter += 1
-                
-                
             }
             
             //MARK: FLIP BOTH CARDS BACK
         } else {
-            guard let firstIndex = firstIndex else { return }
-            guard let secondIndex = secondIndex else { return }
+            guard let firstIndex = firstIndex, let secondIndex = secondIndex else { return }
             
             let cellOne = collectionView.cellForItem(at: firstIndex) as? CardCollectionViewCell
             let cellTwo = collectionView.cellForItem(at: secondIndex) as? CardCollectionViewCell
@@ -141,11 +149,12 @@ final class GameVC: UIViewController {
             self.firstIndex = nil
             self.secondIndex = nil
             
-            cardsArray[firstIndex.row].isFacedUp = false
-            cardsArray[secondIndex.row].isFacedUp = false
+            firstCard?.isFacedUp = false
+            secondCard?.isFacedUp = false
             
-            cellOne?.flipCard()
-            cellTwo?.flipCard()
+            guard let firstCard = firstCard, let secondCard = secondCard else { return }
+            cellOne?.flipCard(card: firstCard)
+            cellTwo?.flipCard(card: secondCard)
             
             //MARK: OPEN NEW FIRST CARD
             openFirstCard(indexpath: indexPath, card: card, cell: cell)
@@ -157,20 +166,7 @@ final class GameVC: UIViewController {
         firstCard = card
         firstIndex = indexpath
         card.isFacedUp = true
-        cell?.flipCard()
-    }
-    
-    //MARK: newGame()
-    func newGame() {
-        
-        cardsArray.forEach {$0.isFacedUp = false}
-        cardsArray.forEach {$0.isMatched = false}
-        
-        getDeckFromNetwork()
-        collectionView.reloadData()
-        firstIndex = nil
-        secondIndex = nil
-        scoreCounter = 0
+        cell?.flipCard(card: card)
     }
     
     //MARK: gameOver()
@@ -201,7 +197,7 @@ final class GameVC: UIViewController {
             self.timerLabel?.removeFromSuperview()
             self.scoreLabel?.removeFromSuperview()
             self.timer?.invalidate()
-
+            
             self.navigationController?.popViewController(animated: true)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -221,7 +217,7 @@ final class GameVC: UIViewController {
             self.scoreCounter = 0
             self.gameHaveBeenStarted = false
             self.timer?.invalidate()
-
+            
             self.newGame()
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
@@ -249,7 +245,7 @@ final class GameVC: UIViewController {
                                      height: navigationBar.frame.height)
         scoreLabel = UILabel(frame: scoreLabelFrame)
         scoreLabel?.font = UIFont(name: "BelweBT-Bold", size: 20)
-
+        
         if let timerLabel = timerLabel, let scoreLabel = scoreLabel {
             navigationBar.addSubview(timerLabel)
             navigationBar.addSubview(scoreLabel)
@@ -278,19 +274,30 @@ final class GameVC: UIViewController {
         fuseOutlet.progress = Float(timerCounter) / Float(setTimer)
     }
     
-    func getDeckFromNetwork() {
+    func newGame() {
+        cardsArray.forEach {$0.isFacedUp = false}
+        cardsArray.forEach {$0.isMatched = false}
+        firstIndex = nil
+        secondIndex = nil
+        
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        
         NetworkService().getCards { [weak self] deck in
             guard let currentDeck = self?.game.generateDeckOnline(deckFromAPI: deck) else {return}
             self?.cardsDataDownloader.download(currentDeck) { completeDeck in
                 self?.cardsArray = completeDeck
             }
+            self?.activityIndicator.stopAnimating()
+            self?.activityIndicator.isHidden = true
+            self?.cardsLeftInDeck = self?.decksize ?? 0
         }
     }
     
     
     @objc func timerAction() {
         if timerCounter <= 0 {
-        gameOver()
+            gameOver()
             timer?.invalidate()
         } else {
             timerCounter -= 1
@@ -298,7 +305,7 @@ final class GameVC: UIViewController {
         
     }
     
-
+    
     
 }
 
@@ -320,12 +327,11 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell else {return UICollectionViewCell()}
-
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as? CardCollectionViewCell
+        
         let card = cardsArray[indexPath.row]
-        cell.card = card
-        cell.setupCell()
-        return cell
+        cell?.setupCell(card: card)
+        return cell ?? UICollectionViewCell()
     }
     
     

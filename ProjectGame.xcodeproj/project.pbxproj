@@ -33,6 +33,7 @@
 		40D3864227A9855E0075ACCB /* BelweBT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 40D3864127A9855E0075ACCB /* BelweBT-Bold.ttf */; };
 		56A1C88827B9564700105A2D /* ScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1C88727B9564700105A2D /* ScoreViewModel.swift */; };
 		56A1C8AE27BD653100105A2D /* CardsDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1C8AD27BD653100105A2D /* CardsDataDownloader.swift */; };
+		56C468A827BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C468A727BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		40D3864127A9855E0075ACCB /* BelweBT-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BelweBT-Bold.ttf"; path = "belwe_bd_bt/BelweBT-Bold.ttf"; sourceTree = "<group>"; };
 		56A1C88727B9564700105A2D /* ScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewModel.swift; sourceTree = "<group>"; };
 		56A1C8AD27BD653100105A2D /* CardsDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsDataDownloader.swift; sourceTree = "<group>"; };
+		56C468A727BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+IncreaceSize.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				40C4B67D27B145E200DEFE5F /* UIImage+loadImage.swift */,
 				405F98C027A5B65E00DD7148 /* CGColor+CustomColor.swift */,
 				40A6108627B425DA0050F44A /* UIViewController+CustomElements.swift */,
+				56C468A727BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift */,
 				407FBABA27A67E84004067A6 /* Navigation */,
 			);
 			path = Extencions;
@@ -316,6 +319,7 @@
 				4029D7752793F970009CF961 /* Game.swift in Sources */,
 				40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */,
 				4080C27627AFDD4800331A96 /* NetworkService.swift in Sources */,
+				56C468A827BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift in Sources */,
 				40C4B67E27B145E200DEFE5F /* UIImage+loadImage.swift in Sources */,
 				56A1C88827B9564700105A2D /* ScoreViewModel.swift in Sources */,
 				405F98C127A5B65E00DD7148 /* CGColor+CustomColor.swift in Sources */,

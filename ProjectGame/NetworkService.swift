@@ -13,7 +13,7 @@ import UIKit
 
 struct NetworkService {
     private let host = "https://us.api.blizzard.com/hearthstone"
-    private let token = "_token=US5RRTYadh8wtC3jGVac0zvu40BtqbrF8F"
+    private let token = "_token=USWVTaRZ9ts7kQWclrIskArzn8SvKPovXH"
 
     func getCards(complition: @escaping ([Card]) -> Void) {
         

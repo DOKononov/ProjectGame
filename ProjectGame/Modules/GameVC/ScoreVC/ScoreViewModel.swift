@@ -11,9 +11,7 @@ import CoreData
 protocol ScoreViewModelProtocol {
     var fetchResultController: NSFetchedResultsController<Player>! { get set }
     var players: [Player] { get }
-    
     var didContentChange: (() -> Void)? { get set }
-    
     func loadPlayers()
 }
 
@@ -54,6 +52,4 @@ final class ScoreViewModel: NSObject, ScoreViewModelProtocol, NSFetchedResultsCo
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         loadPlayers()
     }
-
-    
 }

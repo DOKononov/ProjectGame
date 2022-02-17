@@ -11,63 +11,46 @@ import UIKit
 final class CardCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageView: UIImageView!
-    var card = Card(name: "cardBack")
     
-    override var isSelected: Bool {
-        didSet {
+//    override var isSelected: Bool {
+//        didSet {
 //            print(self.isSelected)
-        }
-    }
+//        }
+//    }
     
-    func setupCell() {
+    func setupCell(card: Card) {
+        card.isMatched ? (imageView.alpha = 0.5) : (imageView.alpha = 1)
         
-        if card.isMatched {
-            imageView.alpha = 0.5
-        } else {
-            imageView.alpha = 1
-        }
-        
-        if card.isFacedUp {
-            imageView.image = card.image
-        } else {
-            imageView.image = UIImage(named: "cardBack")
-        }        
+        card.isFacedUp ?
+        (imageView.image = card.image) :
+        (imageView.image = UIImage(named: "cardBack"))
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
+        
         imageView.image = nil
         imageView.alpha = 1.0
     }
     
     
-    func flipCard() {
-        if card.isMatched {
-            UIView.transition(with: imageView,
-                              duration: 0.5,
-                              options: [.transitionFlipFromLeft]) {
-                self.imageView.alpha = 0.5
-            }
-        }
-        
+    func flipCard(card: Card) {
         if card.isFacedUp {
-            UIView.transition(with: imageView,
-                              duration: 0.5,
-                              options: [.transitionFlipFromLeft]) {
-                self.imageView.image = self.card.image
-            }
+            guard let image = card.image else {return}
+            flipWithAnimation(image: image)
         } else {
-            flipWithAnimation(cardName: "cardBack")
+            card.isMatched ? (imageView.alpha = 0.5) : (imageView.alpha = 1)
+            guard let image = UIImage(named: "cardBack") else {return}
+            flipWithAnimation(image: image)
         }
     }
     
     
-    private func flipWithAnimation(cardName: String) {
+    private func flipWithAnimation(image: UIImage) {
         UIView.transition(with: imageView,
                           duration: 0.5,
                           options: [.transitionFlipFromLeft]) {
-            self.imageView.image = UIImage(named: cardName)
+            self.imageView.image = image
         }
     }
 }
