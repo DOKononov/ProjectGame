@@ -55,7 +55,7 @@ struct Game {
                 if !uniqueName.contains(newCard.name) {
                     uniqueName.append(newCard.name)
                     tempDeck.append(newCard)
-                    tempDeck.append(newCard)
+                    tempDeck.append(Card(newCard))
                 }
             }
         }

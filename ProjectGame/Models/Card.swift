@@ -35,6 +35,14 @@ final class Card: Decodable {
 
     }
     
+    init(_ card: Card) {
+        self.id = card.id
+        self.name = card.name
+        self.imageUrl = card.imageUrl
+        self.isFacedUp = card.isFacedUp
+        self.isMatched = card.isMatched
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(Int.self, forKey: .id)

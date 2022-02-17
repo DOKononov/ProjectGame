@@ -19,8 +19,8 @@ final class GameVC: UIViewController {
     private let cardsInRow: CGFloat = 3
     private let heightAspectRatio: CGFloat = 1.3813
     
-    private var setTimer = 10
-    private var decksize = 12
+    private var setTimer = 15
+    private var decksize = 20
     
     var playerName = ""
     private var cardsArray = [Card]() {
