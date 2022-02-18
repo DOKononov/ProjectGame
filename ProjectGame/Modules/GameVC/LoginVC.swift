@@ -9,15 +9,18 @@ import UIKit
 
 final class LoginVC: UIViewController {
     
+    @IBOutlet weak var clearButton: UIButton!
     @IBOutlet private weak var nicknameTF: UITextField!
     @IBOutlet private weak var startButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoginVC.setupCustom(button: startButton)
-        LoginVC.setupCustom(textField: nicknameTF, placeholderText: "Enter nickname")
+        setupCustom(button: startButton)
+        setupCustom(button: clearButton)
+        setupCustom(textField: nicknameTF, placeholderText: "Enter nickname")
         loadPlayerName()
         nicknameTF.becomeFirstResponder()
+        
     }
     
     @IBAction private func startDidPressed(_ sender: UIButton) {
@@ -28,6 +31,9 @@ final class LoginVC: UIViewController {
         savePlaerName()
         
         navigationController?.pushViewController(nextVC, animated: true)
+    }
+    @IBAction func clearButtonDidTapped(_ sender: UIButton) {
+        nicknameTF.text = ""
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
