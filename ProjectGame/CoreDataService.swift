@@ -16,7 +16,6 @@ final class CoreDataService: NSManagedObject {
     }
     
     // MARK: - Core Data stack
-
     static var persistentContainer: NSPersistentCloudKitContainer = {
 
         let container = NSPersistentCloudKitContainer(name: "ProjectGame")
@@ -30,7 +29,6 @@ final class CoreDataService: NSManagedObject {
     }()
 
     // MARK: - Core Data Saving support
-
     static func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

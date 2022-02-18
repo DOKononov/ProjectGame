@@ -31,9 +31,10 @@
                                         <color key="textColor" red="0.36470589040000001" green="0.26666668059999998" blue="0.1725490093" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter nickname " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ng6-Ja-fIN">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter nickname " minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Ng6-Ja-fIN">
                                         <rect key="frame" x="106" y="0.0" width="276" height="34"/>
                                         <color key="backgroundColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.72156864399999998" green="0.67058825489999996" blue="0.5411764979" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="textColor" red="0.56862747670000002" green="0.4588235021" blue="0.39607840779999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>

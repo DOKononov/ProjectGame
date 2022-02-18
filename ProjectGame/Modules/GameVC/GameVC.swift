@@ -15,12 +15,12 @@ final class GameVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
-    private let padding: CGFloat = 20
+    private let padding: CGFloat = 10
     private let cardsInRow: CGFloat = 3
     private let heightAspectRatio: CGFloat = 1.3813
     
     private var setTimer = 15
-    private var decksize = 20
+    private var decksize = 18
     
     var playerName = ""
     private var cardsArray = [Card]() {
