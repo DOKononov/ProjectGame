@@ -8,15 +8,18 @@
 import Foundation
 import CoreData
 
-final class CoreDataService: NSManagedObject {
+final class CoreDataService {
     
-    //TODO: - singleTone
-    static var managadObjectContext: NSManagedObjectContext {
+    static let shared = CoreDataService()
+    
+    private init() { }
+    
+     var managadObjectContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
     // MARK: - Core Data stack
-    static var persistentContainer: NSPersistentCloudKitContainer = {
+     var persistentContainer: NSPersistentCloudKitContainer = {
 
         let container = NSPersistentCloudKitContainer(name: "ProjectGame")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -29,7 +32,7 @@ final class CoreDataService: NSManagedObject {
     }()
 
     // MARK: - Core Data Saving support
-    static func saveContext () {
+     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

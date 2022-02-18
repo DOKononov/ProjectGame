@@ -32,7 +32,7 @@ final class LoginVC: UIViewController {
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    @IBAction func clearButtonDidTapped(_ sender: UIButton) {
+    @IBAction private func clearButtonDidTapped(_ sender: UIButton) {
         nicknameTF.text = ""
     }
     

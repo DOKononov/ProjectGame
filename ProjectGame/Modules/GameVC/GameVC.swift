@@ -12,7 +12,7 @@ final class GameVC: UIViewController {
     
     @IBOutlet private weak var fuseOutlet: UIProgressView!
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     
     private let padding: CGFloat = 10
@@ -24,7 +24,10 @@ final class GameVC: UIViewController {
     
     var playerName = ""
     private var cardsArray = [Card]() {
-        didSet { collectionView.reloadData() }
+        didSet {
+            cardsLeftInDeck = cardsArray.count
+            collectionView.reloadData()
+        }
     }
     
     private var cardsLeftInDeck = 0 {
@@ -35,7 +38,7 @@ final class GameVC: UIViewController {
         }
     }
     
-    var gameHaveBeenStarted = false
+    private var gameHaveBeenStarted = false
     
     private var firstIndex: IndexPath?
     private var secondIndex: IndexPath?
@@ -178,10 +181,10 @@ final class GameVC: UIViewController {
             self.scoreLabel?.removeFromSuperview()
             
             if self.scoreCounter > 0 {
-                let player = Player(context: CoreDataService.managadObjectContext)
+                let player = Player(context: CoreDataService.shared.managadObjectContext)
                 player.score = Int64(self.scoreCounter)
                 player.name = self.playerName
-                CoreDataService.saveContext()
+                CoreDataService.shared.saveContext()
             }
             
             self.navigationController?.pushViewController(nextVC, animated: true)
@@ -221,7 +224,9 @@ final class GameVC: UIViewController {
             self.newGame()
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.resumeTimer()
+            if self.gameHaveBeenStarted {
+                self.resumeTimer()
+            }
         }
         alert.addAction(okButton)
         alert.addAction(cancel)
@@ -274,7 +279,7 @@ final class GameVC: UIViewController {
         fuseOutlet.progress = Float(timerCounter) / Float(setTimer)
     }
     
-    func newGame() {
+    private func newGame() {
         cardsArray.forEach {$0.isFacedUp = false}
         cardsArray.forEach {$0.isMatched = false}
         firstIndex = nil
@@ -283,26 +288,28 @@ final class GameVC: UIViewController {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
-        NetworkService().getCards { [weak self] deck in
-            guard let currentDeck = self?.game.generateDeckOnline(deckFromAPI: deck) else {return}
-            self?.cardsDataDownloader.download(currentDeck) { completeDeck in
-                self?.cardsArray = completeDeck
-            }
+        NetworkService().getCards { [weak self] fullDeckFromAPI in
+            
+            self?.game.generateDeckOnline(deckFromAPI: fullDeckFromAPI, complition: { deckWOImages in
+                
+                self?.cardsDataDownloader.download(deckWOImages, completion: { [weak self]  completeDeck in
+                    
+                    self?.cardsArray = completeDeck
+                })
+            })
             self?.activityIndicator.stopAnimating()
             self?.activityIndicator.isHidden = true
-            self?.cardsLeftInDeck = self?.decksize ?? 0
         }
     }
     
     
-    @objc func timerAction() {
+    @objc private func timerAction() {
         if timerCounter <= 0 {
             gameOver()
             timer?.invalidate()
         } else {
             timerCounter -= 1
         }
-        
     }
     
     

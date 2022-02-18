@@ -26,7 +26,6 @@
 		407FBAB727A67CDA004067A6 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407FBAB627A67CDA004067A6 /* CoreDataService.swift */; };
 		4080C27627AFDD4800331A96 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080C27527AFDD4800331A96 /* NetworkService.swift */; };
 		40A6108727B425DA0050F44A /* LoginVC+CustomElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A6108627B425DA0050F44A /* LoginVC+CustomElements.swift */; };
-		40C4B67E27B145E200DEFE5F /* UIImage+loadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4B67D27B145E200DEFE5F /* UIImage+loadImage.swift */; };
 		40CF9B3B27AC021600C25A4F /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF9B3927AC021600C25A4F /* Player+CoreDataClass.swift */; };
 		40CF9B3C27AC021600C25A4F /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF9B3A27AC021600C25A4F /* Player+CoreDataProperties.swift */; };
 		40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */; };
@@ -58,7 +57,6 @@
 		407FBAB627A67CDA004067A6 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		4080C27527AFDD4800331A96 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		40A6108627B425DA0050F44A /* LoginVC+CustomElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC+CustomElements.swift"; sourceTree = "<group>"; };
-		40C4B67D27B145E200DEFE5F /* UIImage+loadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+loadImage.swift"; sourceTree = "<group>"; };
 		40CF9B3927AC021600C25A4F /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = "<group>"; };
 		40CF9B3A27AC021600C25A4F /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 		405F98BF27A58A7400DD7148 /* Extencions */ = {
 			isa = PBXGroup;
 			children = (
-				40C4B67D27B145E200DEFE5F /* UIImage+loadImage.swift */,
 				405F98C027A5B65E00DD7148 /* CGColor+CustomColor.swift */,
 				40A6108627B425DA0050F44A /* LoginVC+CustomElements.swift */,
 				56C468A727BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift */,
@@ -320,7 +317,6 @@
 				40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */,
 				4080C27627AFDD4800331A96 /* NetworkService.swift in Sources */,
 				56C468A827BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift in Sources */,
-				40C4B67E27B145E200DEFE5F /* UIImage+loadImage.swift in Sources */,
 				56A1C88827B9564700105A2D /* ScoreViewModel.swift in Sources */,
 				405F98C127A5B65E00DD7148 /* CGColor+CustomColor.swift in Sources */,
 				4066E733278EF1B1003793CF /* CardCollectionViewCell.swift in Sources */,

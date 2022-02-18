@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,15 +26,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PRE-6d-ThN">
-                                <rect key="frame" x="16" y="428" width="382" height="40"/>
+                                <rect key="frame" x="16" y="328" width="382" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAP-sk-Wve">
                                         <rect key="frame" x="0.0" y="0.0" width="84" height="40"/>
                                         <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="17"/>
-                                        <color key="textColor" red="0.36470589040000001" green="0.26666668059999998" blue="0.1725490093" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter nickname " minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Ng6-Ja-fIN">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter nickname " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ng6-Ja-fIN">
                                         <rect key="frame" x="92" y="0.0" width="242" height="40"/>
                                         <color key="backgroundColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" red="0.72156864399999998" green="0.67058825489999996" blue="0.5411764979" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -61,9 +60,9 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xr1-Tu-XuD">
-                                <rect key="frame" x="150" y="484" width="114" height="35"/>
+                                <rect key="frame" x="150" y="408" width="114" height="35"/>
                                 <color key="backgroundColor" red="0.75294119120000003" green="0.69803923369999998" blue="0.55294120309999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" red="0.36470589040000001" green="0.26666668059999998" blue="0.1686274707" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Start game" cornerStyle="medium">
                                     <fontDescription key="titleFontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="17"/>
@@ -73,7 +72,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VN6-fd-fsN">
-                                <rect key="frame" x="120" y="339" width="174.5" height="49"/>
+                                <rect key="frame" x="120" y="219" width="174.5" height="49"/>
                                 <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="40"/>
                                 <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -88,11 +87,11 @@
                             <constraint firstItem="PRE-6d-ThN" firstAttribute="leading" secondItem="PY9-cf-b9a" secondAttribute="leading" constant="16" id="OMV-jR-zrb"/>
                             <constraint firstItem="tdu-MQ-f1l" firstAttribute="leading" secondItem="PY9-cf-b9a" secondAttribute="leading" id="R4v-Pk-Jh5"/>
                             <constraint firstItem="tdu-MQ-f1l" firstAttribute="trailing" secondItem="PY9-cf-b9a" secondAttribute="trailing" id="XOU-YJ-adP"/>
-                            <constraint firstItem="PRE-6d-ThN" firstAttribute="top" secondItem="VN6-fd-fsN" secondAttribute="bottom" constant="40" id="Zde-pi-CZf"/>
+                            <constraint firstItem="PRE-6d-ThN" firstAttribute="top" secondItem="VN6-fd-fsN" secondAttribute="bottom" constant="60" id="Zde-pi-CZf"/>
                             <constraint firstItem="PY9-cf-b9a" firstAttribute="trailing" secondItem="PRE-6d-ThN" secondAttribute="trailing" constant="16" id="deX-Ur-Phs"/>
                             <constraint firstItem="tdu-MQ-f1l" firstAttribute="top" secondItem="hXe-ws-x9A" secondAttribute="top" id="oAx-ho-p7h"/>
-                            <constraint firstItem="xr1-Tu-XuD" firstAttribute="top" secondItem="PRE-6d-ThN" secondAttribute="bottom" constant="16" id="usa-s2-ty6"/>
-                            <constraint firstItem="PRE-6d-ThN" firstAttribute="centerY" secondItem="hXe-ws-x9A" secondAttribute="centerY" id="yp3-Yf-70q"/>
+                            <constraint firstItem="xr1-Tu-XuD" firstAttribute="top" secondItem="PRE-6d-ThN" secondAttribute="bottom" constant="40" id="usa-s2-ty6"/>
+                            <constraint firstItem="PRE-6d-ThN" firstAttribute="centerY" secondItem="hXe-ws-x9A" secondAttribute="centerY" constant="-100" id="yp3-Yf-70q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="60O-x9-cfC"/>
@@ -159,7 +158,7 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="Cuk-x8-EwK">
                                 <rect key="frame" x="0.0" y="71" width="414" height="754"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" name="AccentColor"/>
+                                <color key="color" red="0.21568629149999999" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -212,33 +211,33 @@
                                 <rect key="frame" x="32" y="120" width="350" height="710"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZYj-iV-R7x">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="101.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="92"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP players" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NP5-PV-lN3">
                                                 <rect key="frame" x="58" y="0.0" width="234.5" height="49"/>
                                                 <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="40"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hu1-0I-tVf" userLabel="rank/score/player">
-                                                <rect key="frame" x="8" y="65" width="334" height="36.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hu1-0I-tVf" userLabel="rank/score/player">
+                                                <rect key="frame" x="8" y="65" width="334" height="27"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rank" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="STL-t9-e1K">
-                                                        <rect key="frame" x="0.0" y="0.0" width="106" height="36.5"/>
-                                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="30"/>
-                                                        <nil key="textColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="rank" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="STL-t9-e1K">
+                                                        <rect key="frame" x="0.0" y="0.0" width="52.5" height="27"/>
+                                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="22"/>
+                                                        <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Vv-hr-1Dr">
-                                                        <rect key="frame" x="114" y="0.0" width="106" height="36.5"/>
-                                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="30"/>
-                                                        <nil key="textColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="1Vv-hr-1Dr">
+                                                        <rect key="frame" x="60.5" y="0.0" width="70" height="27"/>
+                                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="22"/>
+                                                        <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="1yj-Q9-qEd">
-                                                        <rect key="frame" x="228" y="0.0" width="106" height="36.5"/>
-                                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="30"/>
-                                                        <nil key="textColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="player" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="1yj-Q9-qEd">
+                                                        <rect key="frame" x="138.5" y="0.0" width="195.5" height="27"/>
+                                                        <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="22"/>
+                                                        <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -252,7 +251,7 @@
                                         </constraints>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1vp-je-P7d">
-                                        <rect key="frame" x="0.0" y="133.5" width="350" height="576.5"/>
+                                        <rect key="frame" x="0.0" y="124" width="350" height="586"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScoreTableViewCell" id="lx1-pG-Vsp" customClass="ScoreTableViewCell" customModule="ProjectGame" customModuleProvider="target">
@@ -262,23 +261,23 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="350" height="33"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BQF-Gc-BQX">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BQF-Gc-BQX">
                                                             <rect key="frame" x="8" y="4" width="334" height="25"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJ3-n1-f2x">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="106" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="52.5" height="25"/>
                                                                     <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="666" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="973-dM-IpE">
-                                                                    <rect key="frame" x="114" y="0.0" width="106" height="25"/>
+                                                                    <rect key="frame" x="60.5" y="0.0" width="70" height="25"/>
                                                                     <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dima" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abc-4C-6EN">
-                                                                    <rect key="frame" x="228" y="0.0" width="106" height="25"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dima" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abc-4C-6EN">
+                                                                    <rect key="frame" x="138.5" y="0.0" width="195.5" height="25"/>
                                                                     <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="20"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -288,10 +287,12 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.1472219993129702" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="SJ3-n1-f2x" firstAttribute="width" secondItem="m0s-dq-Z8a" secondAttribute="width" multiplier="0.15" id="27J-SK-QUA"/>
                                                         <constraint firstAttribute="bottom" secondItem="BQF-Gc-BQX" secondAttribute="bottom" constant="4" id="4LR-Dq-vkG"/>
                                                         <constraint firstItem="BQF-Gc-BQX" firstAttribute="leading" secondItem="m0s-dq-Z8a" secondAttribute="leading" constant="8" id="8G8-4R-xu9"/>
                                                         <constraint firstAttribute="trailing" secondItem="BQF-Gc-BQX" secondAttribute="trailing" constant="8" id="Kmw-Jk-wuy"/>
                                                         <constraint firstItem="BQF-Gc-BQX" firstAttribute="top" secondItem="m0s-dq-Z8a" secondAttribute="top" constant="4" id="PTz-2b-aVP"/>
+                                                        <constraint firstItem="973-dM-IpE" firstAttribute="width" secondItem="m0s-dq-Z8a" secondAttribute="width" multiplier="0.2" id="nAI-XD-4oq"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -310,8 +311,10 @@
                                     <constraint firstItem="1vp-je-P7d" firstAttribute="top" secondItem="ZYj-iV-R7x" secondAttribute="bottom" constant="32" id="JaO-Io-8U9"/>
                                     <constraint firstAttribute="trailing" secondItem="1vp-je-P7d" secondAttribute="trailing" id="a4D-Wq-SGk"/>
                                     <constraint firstItem="ZYj-iV-R7x" firstAttribute="top" secondItem="2Ji-qM-Kql" secondAttribute="top" id="aBe-Lf-ppr"/>
+                                    <constraint firstItem="1Vv-hr-1Dr" firstAttribute="width" secondItem="1vp-je-P7d" secondAttribute="width" multiplier="0.2" id="fcS-iJ-9b5"/>
                                     <constraint firstItem="ZYj-iV-R7x" firstAttribute="leading" secondItem="2Ji-qM-Kql" secondAttribute="leading" id="gcj-vH-W2e"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1vp-je-P7d" secondAttribute="bottom" id="jyh-L1-ULJ"/>
+                                    <constraint firstItem="STL-t9-e1K" firstAttribute="width" secondItem="1vp-je-P7d" secondAttribute="width" multiplier="0.15" id="yab-YT-HaQ"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -369,8 +372,5 @@
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="viewBackground" width="728" height="902"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

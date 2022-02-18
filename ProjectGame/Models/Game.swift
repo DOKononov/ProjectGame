@@ -47,7 +47,7 @@ struct Game {
         return tempDeck.shuffled()
     }
     
-    func generateDeckOnline(deckFromAPI:[Card]) -> [Card] {
+    func generateDeckOnline(deckFromAPI:[Card], complition: (([Card]) -> Void)) {
         var tempDeck = [Card]()
         var uniqueName = [String]()
         while tempDeck.count < deckSize {
@@ -59,7 +59,7 @@ struct Game {
                 }
             }
         }
-        return tempDeck.shuffled()
+        complition(tempDeck.shuffled())
     }
     
     

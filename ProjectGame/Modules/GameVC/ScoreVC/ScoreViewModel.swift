@@ -43,7 +43,7 @@ final class ScoreViewModel: NSObject, ScoreViewModelProtocol, NSFetchedResultsCo
         request.sortDescriptors = [scoreDescriptor]
         
         fetchResultController = NSFetchedResultsController(fetchRequest: request,
-                                                           managedObjectContext: CoreDataService.managadObjectContext,
+                                                           managedObjectContext: CoreDataService.shared.managadObjectContext,
                                                            sectionNameKeyPath: nil,
                                                            cacheName: nil)
         fetchResultController.delegate = self
