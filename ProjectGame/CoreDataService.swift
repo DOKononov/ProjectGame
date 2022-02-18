@@ -10,6 +10,7 @@ import CoreData
 
 final class CoreDataService: NSManagedObject {
     
+    //TODO: - singleTone
     static var managadObjectContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
