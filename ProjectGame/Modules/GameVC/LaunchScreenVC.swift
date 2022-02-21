@@ -22,10 +22,9 @@ final class LaunchScreenVC: UIViewController {
         
         
         UIView.animate(withDuration: 0.5, delay: 2) {
-            let endPosition: CGFloat = self.view.frame.origin.y - self.view.frame.height
             self.imageView.transform = CGAffineTransform(rotationAngle: .pi)
-            self.imageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            self.imageView.frame.origin.y = endPosition
+            self.imageView.transform = CGAffineTransform(scaleX: 3, y: 3)
+            self.imageView.alpha = 0
         } completion: { _ in
             guard let mainNC = MainNC.getVC(from: .main) else {return}
             mainNC.modalPresentationStyle = .fullScreen

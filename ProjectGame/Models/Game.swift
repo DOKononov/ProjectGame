@@ -16,7 +16,7 @@ struct Game {
     }
     
     
-    func generateDeck(deckFromAPI:[Card], complition: @escaping (([Card]) -> Void)) {
+    func generateDeck(deckFromAPI:[Card], complition: @escaping ([Card]) -> Void) {
         let myQueue = DispatchQueue(label: "myQueue", qos: .default)
         var tempDeck = [Card]()
         var uniqueName = [String]()
