@@ -13,7 +13,7 @@ final class GameVC: UIViewController {
     @IBOutlet private weak var fuseOutlet: UIProgressView!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var errorLabel: UILabel!
     
     private let padding: CGFloat = 10
     private let cardsInRow: CGFloat = 3
@@ -68,6 +68,7 @@ final class GameVC: UIViewController {
         super.viewDidLoad()
         collectionView.dataSource = self
         collectionView.delegate = self
+        errorLabel.isHidden = true
         
         addLableToNaviBar()
         activityIndicator.scaleIndicator(factor: 2)
@@ -75,11 +76,8 @@ final class GameVC: UIViewController {
         timerCounter = setTimer
         setupFuse()
         
-        
         game = Game(deckSize: decksize)
         newGame()
-        
-        
     }
     
     
@@ -89,7 +87,6 @@ final class GameVC: UIViewController {
         timer?.invalidate()
         let alertSheat = UIAlertController(title: "Game paused", message: nil, preferredStyle: .actionSheet)
         let restartGame = UIAlertAction(title: "Restart game", style: .default) { action in
-            //TODO: -New game
             self.alertForRestartGame()
         }
         
@@ -176,7 +173,7 @@ final class GameVC: UIViewController {
     private func gameOver() {
         let alert = UIAlertController(title: "GAME OVER!", message: nil, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .default) { _ in
-            guard let nextVC = ScoreVC.getVC(from: .main) as? ScoreVC else {return}
+            guard let nextVC = ScoreVC.getVC(from: .main) else {return}
             self.timerLabel?.removeFromSuperview()
             self.scoreLabel?.removeFromSuperview()
             
@@ -195,7 +192,9 @@ final class GameVC: UIViewController {
     
     //MARK: alertForNameChanging()
     private func alertForNameChanging() {
-        let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Are you sure want to quit current game?",
+                                      message: "All unsaved progress will be lost.",
+                                      preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
             self.timerLabel?.removeFromSuperview()
             self.scoreLabel?.removeFromSuperview()
@@ -214,7 +213,9 @@ final class GameVC: UIViewController {
     
     //MARK: alertForRestartGame()
     private func alertForRestartGame() {
-        let alert = UIAlertController(title: "Are you sure you want to quit the current game?", message: "All unsaved progress will be lost.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Are you sure want to quit current game?",
+                                      message: "All unsaved progress will be lost.",
+                                      preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .destructive) { _ in
             self.timerCounter = self.setTimer
             self.scoreCounter = 0
@@ -271,7 +272,11 @@ final class GameVC: UIViewController {
     
     
     private func resumeTimer() {
-        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerAction), userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 1,
+                                          target: self,
+                                          selector: #selector(self.timerAction),
+                                          userInfo: nil,
+                                          repeats: true)
     }
     
     
@@ -288,17 +293,24 @@ final class GameVC: UIViewController {
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
         
-        NetworkService().getCards { [weak self] fullDeckFromAPI in
+        NetworkService().getCards { [weak self] fullDeckFromAPI, errorString in
             
-            self?.game.generateDeckOnline(deckFromAPI: fullDeckFromAPI, complition: { deckWOImages in
+            if let errorString = errorString {
+                self?.showError(error: errorString)
                 
-                self?.cardsDataDownloader.download(deckWOImages, completion: { [weak self]  completeDeck in
+            } else  if let fullDeckFromAPI = fullDeckFromAPI {
+                self?.game.generateDeck(deckFromAPI: fullDeckFromAPI,
+                                              complition: { [weak self] deckWOImages in
                     
-                    self?.cardsArray = completeDeck
+                    self?.cardsDataDownloader.download(deckWOImages,
+                                                       completion: { [weak self]  completeDeck in
+                        
+                        self?.cardsArray = completeDeck
+                    })
                 })
-            })
-            self?.activityIndicator.stopAnimating()
-            self?.activityIndicator.isHidden = true
+                self?.activityIndicator.stopAnimating()
+                self?.activityIndicator.isHidden = true
+            }
         }
     }
     
@@ -312,6 +324,14 @@ final class GameVC: UIViewController {
         }
     }
     
+    private func showError(error: String) {
+        DispatchQueue.main.async {
+            self.errorLabel.isHidden = false
+            self.errorLabel.text = error
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.isHidden = true
+        }
+    }
     
     
 }
@@ -341,8 +361,6 @@ extension GameVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
         return cell ?? UICollectionViewCell()
     }
     
-    
-    //aspectRatio 1 : 1.3813
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let frameWidth = min(view.frame.width, view.frame.height)

@@ -10,7 +10,7 @@ import UIKit
 
 
 extension UIViewController {
-    static func getVC(from storyboard: UIStoryboard) -> UIViewController {
-        return storyboard.instantiateViewController(withIdentifier: "\(Self.self)") as! Self
+    static func getVC(from storyboard: UIStoryboard) -> Self? {
+        return storyboard.instantiateViewController(withIdentifier: "\(Self.self)") as? Self
     }
 }

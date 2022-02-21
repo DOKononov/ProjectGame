@@ -160,6 +160,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" red="0.21568629149999999" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJu-RH-82c">
+                                <rect key="frame" x="20" y="433" width="374" height="30.5"/>
+                                <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.90196073060000004" green="0.8392156959" blue="0.6784313917" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -167,11 +173,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tQc-uZ-LGe" secondAttribute="bottom" id="CgW-b6-WYj"/>
                             <constraint firstItem="tQc-uZ-LGe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EIw-SD-WV7"/>
                             <constraint firstAttribute="trailing" secondItem="3JV-An-SzT" secondAttribute="trailing" id="FQr-6T-4GJ"/>
+                            <constraint firstItem="gJu-RH-82c" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="IPS-bu-JJx"/>
+                            <constraint firstItem="gJu-RH-82c" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="R1l-v0-ySe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qXC-6L-FVD" secondAttribute="trailing" constant="16" id="d43-0r-oLi"/>
                             <constraint firstItem="tQc-uZ-LGe" firstAttribute="top" secondItem="qXC-6L-FVD" secondAttribute="bottom" constant="8" id="hRm-kZ-xei"/>
                             <constraint firstItem="3JV-An-SzT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="jQk-vo-0Bh"/>
                             <constraint firstItem="3JV-An-SzT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jw7-kl-o0N"/>
                             <constraint firstItem="qXC-6L-FVD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="maI-13-1pr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gJu-RH-82c" secondAttribute="trailing" constant="20" id="o7W-rV-iZi"/>
                             <constraint firstAttribute="bottom" secondItem="3JV-An-SzT" secondAttribute="bottom" id="phQ-D4-g0V"/>
                             <constraint firstItem="qXC-6L-FVD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vxe-hB-tE6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tQc-uZ-LGe" secondAttribute="trailing" id="xXq-xP-ot5"/>
@@ -188,6 +197,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Cuk-x8-EwK" id="kHZ-zW-hbe"/>
                         <outlet property="collectionView" destination="tQc-uZ-LGe" id="vj4-ee-EZT"/>
+                        <outlet property="errorLabel" destination="gJu-RH-82c" id="gkc-Ck-8RV"/>
                         <outlet property="fuseOutlet" destination="qXC-6L-FVD" id="SOD-aQ-h3O"/>
                     </connections>
                 </viewController>
@@ -211,16 +221,16 @@
                                 <rect key="frame" x="32" y="120" width="350" height="710"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZYj-iV-R7x">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="92"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="89"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP players" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NP5-PV-lN3">
-                                                <rect key="frame" x="58" y="0.0" width="234.5" height="49"/>
+                                                <rect key="frame" x="58" y="0.0" width="234.5" height="46"/>
                                                 <fontDescription key="fontDescription" name="BelweBT-Bold" family="Belwe Bd BT" pointSize="40"/>
                                                 <color key="textColor" red="0.21960783" green="0.066666662690000003" blue="0.05882352591" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hu1-0I-tVf" userLabel="rank/score/player">
-                                                <rect key="frame" x="8" y="65" width="334" height="27"/>
+                                                <rect key="frame" x="8" y="62" width="334" height="27"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="rank" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="STL-t9-e1K">
                                                         <rect key="frame" x="0.0" y="0.0" width="52.5" height="27"/>
@@ -251,7 +261,7 @@
                                         </constraints>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1vp-je-P7d">
-                                        <rect key="frame" x="0.0" y="124" width="350" height="586"/>
+                                        <rect key="frame" x="0.0" y="121" width="350" height="589"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScoreTableViewCell" id="lx1-pG-Vsp" customClass="ScoreTableViewCell" customModule="ProjectGame" customModuleProvider="target">

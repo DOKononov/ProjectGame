@@ -25,10 +25,10 @@ final class LoginVC: UIViewController {
     
     @IBAction private func startDidPressed(_ sender: UIButton) {
         guard nicknameTF.hasText else {return}
-        guard let nextVC =  GameVC.getVC(from: .main) as? GameVC else {return}
+        guard let nextVC =  GameVC.getVC(from: .main) else {return}
         guard let name = nicknameTF.text else {return}
         nextVC.playerName = name
-        savePlaerName()
+        savePlayerName()
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
@@ -40,7 +40,7 @@ final class LoginVC: UIViewController {
         view.endEditing(true)
     }
     
-    private func savePlaerName() {
+    private func savePlayerName() {
         UserDefaults.standard.set(nicknameTF.text, forKey: "playerName")
     }
     

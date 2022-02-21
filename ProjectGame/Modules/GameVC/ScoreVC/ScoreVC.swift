@@ -27,8 +27,10 @@ final class ScoreVC: UIViewController {
         scoreViewModel.didContentChange = {
             self.tableView.reloadData()
         }
+        
         scoreViewModel.loadPlayers()
     }
+    
     
     @IBAction private func doneButtonPressed(_ sender: UIBarButtonItem) {
         navigationController?.popToRootViewController(animated: true)
