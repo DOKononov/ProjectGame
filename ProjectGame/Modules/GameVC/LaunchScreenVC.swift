@@ -24,10 +24,11 @@ final class LaunchScreenVC: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 2) {
             self.imageView.transform = CGAffineTransform(rotationAngle: .pi)
             self.imageView.transform = CGAffineTransform(scaleX: 3, y: 3)
-            self.imageView.alpha = 0
+            self.imageView.alpha = 0.1
         } completion: { _ in
             guard let mainNC = MainNC.getVC(from: .main) else {return}
             mainNC.modalPresentationStyle = .fullScreen
+            mainNC.modalTransitionStyle = .crossDissolve
             self.present(mainNC, animated: true, completion: nil)
         }
     }

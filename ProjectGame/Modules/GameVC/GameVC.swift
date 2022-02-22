@@ -20,7 +20,7 @@ final class GameVC: UIViewController {
     private let heightAspectRatio: CGFloat = 1.3813
     
     private var setTimer = 15
-    private var decksize = 18
+    private var decksize = 12
     
     var playerName = ""
     private var cardsArray = [Card]() {
@@ -135,7 +135,7 @@ final class GameVC: UIViewController {
                 secondCard?.isMatched = true
                 
                 cardsLeftInDeck -= 2
-                timerCounter += 3
+                timerCounter += 2
                 scoreCounter += 1
             }
             

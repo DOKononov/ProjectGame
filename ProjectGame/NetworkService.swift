@@ -8,12 +8,10 @@
 import Foundation
 import UIKit
 
-
-
 struct NetworkService {
     private let host = "https://us.api.blizzard.com/hearthstone"
     private let path = "/cards?locale=en_US&type=minion&pageSize=0&access"
-    private let token = "_token=USMQ5pqghqb4z8eX1pY2Be9gqYffz1ixCI"
+    private let token = "_token=USApkxTICvdXs1JbnL0DsAoVF6rMVJBFhG"
     private let successResponce = 200...299
 
     func getCards(complition: @escaping ([Card]?, String?) -> Void) {
@@ -37,13 +35,8 @@ struct NetworkService {
                 } else {
                     complition(nil, "Error: responce.statusCode: \(responce.statusCode)")
                 }
-             
-                
             }
         }.resume()
     }
-    
-    
-    
 }
 
