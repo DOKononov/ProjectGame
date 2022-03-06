@@ -15,8 +15,6 @@ protocol ScoreViewModelProtocol {
     func loadPlayers()
 }
 
-
-
 final class ScoreViewModel: NSObject, ScoreViewModelProtocol, NSFetchedResultsControllerDelegate {
     
     var fetchResultController: NSFetchedResultsController<Player>!
@@ -35,8 +33,7 @@ final class ScoreViewModel: NSObject, ScoreViewModelProtocol, NSFetchedResultsCo
         }
     }
     
-    
-    
+
     private func setupFetchResultController() {
         let request = Player.fetchRequest()
         let scoreDescriptor = NSSortDescriptor(key: "score", ascending: false)

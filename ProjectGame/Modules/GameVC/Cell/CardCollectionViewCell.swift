@@ -12,12 +12,6 @@ final class CardCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageView: UIImageView!
     
-//    override var isSelected: Bool {
-//        didSet {
-//            print(self.isSelected)
-//        }
-//    }
-    
     func setupCell(card: Card) {
         card.isMatched ? (imageView.alpha = 0.5) : (imageView.alpha = 1)
         

@@ -10,10 +10,8 @@ import CoreData
 
 final class ScoreVC: UIViewController {
 
-
     @IBOutlet private  weak var tableView: UITableView!
     private var scoreViewModel: ScoreViewModelProtocol = ScoreViewModel()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +28,6 @@ final class ScoreVC: UIViewController {
         
         scoreViewModel.loadPlayers()
     }
-    
     
     @IBAction private func doneButtonPressed(_ sender: UIBarButtonItem) {
         navigationController?.popToRootViewController(animated: true)

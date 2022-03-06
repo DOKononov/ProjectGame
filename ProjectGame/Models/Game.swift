@@ -15,7 +15,6 @@ struct Game {
         self.deckSize = deckSize
     }
     
-    
     func generateDeck(deckFromAPI:[Card], complition: @escaping ([Card]) -> Void) {
         let myQueue = DispatchQueue(label: "myQueue", qos: .default)
         var tempDeck = [Card]()
@@ -35,7 +34,6 @@ struct Game {
             complition(tempDeck.shuffled())
         }
     }
-    
 }
 
 

@@ -24,7 +24,6 @@
 		407FBAB527A67A55004067A6 /* UIStoryboard+main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407FBAB427A67A55004067A6 /* UIStoryboard+main.swift */; };
 		407FBAB727A67CDA004067A6 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407FBAB627A67CDA004067A6 /* CoreDataService.swift */; };
 		4080C27627AFDD4800331A96 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4080C27527AFDD4800331A96 /* NetworkService.swift */; };
-		40A6108727B425DA0050F44A /* LoginVC+CustomElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A6108627B425DA0050F44A /* LoginVC+CustomElements.swift */; };
 		40CF9B3B27AC021600C25A4F /* Player+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF9B3927AC021600C25A4F /* Player+CoreDataClass.swift */; };
 		40CF9B3C27AC021600C25A4F /* Player+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF9B3A27AC021600C25A4F /* Player+CoreDataProperties.swift */; };
 		40D3863F27A94B020075ACCB /* ScoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */; };
@@ -57,7 +56,6 @@
 		407FBAB427A67A55004067A6 /* UIStoryboard+main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+main.swift"; sourceTree = "<group>"; };
 		407FBAB627A67CDA004067A6 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		4080C27527AFDD4800331A96 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		40A6108627B425DA0050F44A /* LoginVC+CustomElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginVC+CustomElements.swift"; sourceTree = "<group>"; };
 		40CF9B3927AC021600C25A4F /* Player+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataClass.swift"; sourceTree = "<group>"; };
 		40CF9B3A27AC021600C25A4F /* Player+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Player+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		40D3863E27A94B020075ACCB /* ScoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				405F98C027A5B65E00DD7148 /* CGColor+CustomColor.swift */,
-				40A6108627B425DA0050F44A /* LoginVC+CustomElements.swift */,
 				56C468A727BE642C00AC38DA /* UIActivityIndicatorView+IncreaceSize.swift */,
 				407FBABA27A67E84004067A6 /* Navigation */,
 			);
@@ -335,7 +332,6 @@
 				56A1C8AE27BD653100105A2D /* CardsDataDownloader.swift in Sources */,
 				4066E724278EF146003793CF /* ProjectGame.xcdatamodeld in Sources */,
 				405F98C327A5B67D00DD7148 /* LoginVC.swift in Sources */,
-				40A6108727B425DA0050F44A /* LoginVC+CustomElements.swift in Sources */,
 				4066E71A278EF146003793CF /* AppDelegate.swift in Sources */,
 				4066E735278EF1C9003793CF /* GameVC.swift in Sources */,
 				5608CC7D27C3B9A5008A05D1 /* MainNC.swift in Sources */,
