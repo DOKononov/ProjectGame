@@ -11,7 +11,7 @@ import UIKit
 struct NetworkService {
     private let host = "https://us.api.blizzard.com/hearthstone"
     private let path = "/cards?locale=en_US&type=minion&pageSize=0&access"
-    private let token = "_token=USTtBGxpP1L9rbc80B5czI9mWVnrehK2R8"
+    private let token = "_token=USm4LlvwegaOg3FPqiUEfhnTLUVjBqo5vg"
     private let successResponce = 200...299
 
     func getCards(complition: @escaping ([Card]?, String?) -> Void) {
